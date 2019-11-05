@@ -1,0 +1,11 @@
+<thead>
+	<tr>
+		<th>Img.</th>
+		<th>Referencia</th>
+		<th>Produto</th>
+		<th>Preco</th>
+		<th>Quantidade</th>
+		<th>Total</th>
+		<th>Acoes</th>
+	</tr>
+</thead>
