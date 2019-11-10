@@ -1,4 +1,4 @@
-@modal_view(['modal_id' => 'orders_view_1', 'edit_route' => 'orders.edit', 'model_id' => '2'])
+@modal_view(['modal_id' => 'orders_show_1', 'edit_route' => 'orders.edit', 'model_id' => '2'])
 
 @slot('title')
 Pedido #{{ '1' }}
@@ -7,6 +7,10 @@ Pedido #{{ '1' }}
 <h5>Informações</h5>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Cliente: </strong></div>
+	<div class="col">{{ 'João' }}</div>
+</div>
+<div class="row justify-content-center mb-2">
+	<div class="col"><strong>Comprador: </strong></div>
 	<div class="col">{{ 'João' }}</div>
 </div>
 <div class="row justify-content-center mb-2">

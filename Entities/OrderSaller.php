@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderSaller extends Model
 {
-    protected $fillable = [];
+    protected $guarded = [];
 }

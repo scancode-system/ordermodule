@@ -10,7 +10,6 @@
 			@include('order::tables.index.header')
 			<tbody>
 				@each('order::tables.index.row', $orders, 'order')
-				@include('order::tables.index.row')
 			</tbody>
 		</table>
 		{{ $orders->links() }}

@@ -19,7 +19,7 @@ class OrderController extends Controller
 
 
     public function store(OrderRequest $request){
-        OrderRepository::store($request->all());
+        OrderRepository::storeClientSaller($request->client_id, $request->saller_id);
         return redirect()->route('orders.index')->with('success', 'Pedido cadastrado.');
     }    
 

@@ -15,11 +15,11 @@ class OrderObserver
 
 	public function created(Order $order)
 	{
-/*		OrderClient::create([]);
-		OrderClientAddress::create([]);
-		OrderSaller::create([]);
-		OrderPayment::create([]);
-		OrderShippingCompany::create([]);
-*/	}	
+		$order_client = OrderClient::create(['order_id' => $order->id]);
+		OrderClientAddress::create(['order_client_id' => $order_client->id]);
+		OrderSaller::create(['order_id' => $order->id]);
+		OrderPayment::create(['order_id' => $order->id]);
+		OrderShippingCompany::create(['order_id' => $order->id]);
+	}	
 
 }

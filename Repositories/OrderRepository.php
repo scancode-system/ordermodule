@@ -19,6 +19,7 @@ class OrderRepository
 		orWhereHas('status', function($query) use ($search) {
 			$query->where('description', 'like', '%'.$search.'%');
 		})->
+		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
 		paginate($limit);
 
 		$orders->appends(request()->query());
@@ -26,8 +27,10 @@ class OrderRepository
 	}
 
 
-	public static function store($data){
-		$order = Order::create($data);
+	public static function storeClientSaller($client_id, $saller_id){
+		$order = Order::create([]);
+		$order->order_client->update(['client_id' => $client_id]);
+		$order->order_saller->update(['saller_id' => $saller_id]);
 	}
 
 
