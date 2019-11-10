@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderRepresentativesTable extends Migration
+class CreateOrderSallersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateOrderRepresentativesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_representatives', function (Blueprint $table) {
+        Schema::create('order_sallers', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('representative_id');
+
+            $table->bigInteger('saller_id');
           $table->string('name')->nullable();
            $table->string('email')->nullable();
 
@@ -33,6 +34,6 @@ class CreateOrderRepresentativesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_representatives');
+        Schema::dropIfExists('order_sallers');
     }
 }

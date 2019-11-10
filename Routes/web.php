@@ -15,7 +15,7 @@
 Route::prefix('orders')->middleware('auth')->group(function() {
 	Route::get('', 'OrderController@index')->name('orders.index');
 	Route::get('{order}/edit/{tab?}', 'OrderController@edit')->name('orders.edit');
-
+	// post
 	Route::post('', 'OrderController@store')->name('orders.store');
 	// put
 	Route::put('{order}', 'OrderController@update')->name('orders.update');

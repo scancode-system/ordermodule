@@ -16,16 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('status_id')->default('1');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('restrict')->onUpdate('cascade');
 
-            $table->boolean('full_delivery')->defaut(1);
+            $table->boolean('full_delivery')->default(true);
 
-            $table->text('observation');
-            $table->text('signature');
+            $table->text('observation')->nullable();
+            $table->text('signature')->nullable();
 
-            $table->boolean('change')->defaut(0);
-            $table->dateTime('closing date')->nullabe();
+            $table->boolean('change')->default(false);
+            $table->dateTime('closing_date')->nullable();
 
             $table->timestamps();
         });

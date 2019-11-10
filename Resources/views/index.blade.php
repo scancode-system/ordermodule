@@ -5,34 +5,15 @@
 <div class="card">
 	@include('order::subviews.index_header',['search' => 'Pesquisar', 'route_search' => 'orders.index', 'route_add' => 'orders.create'])
 	<div class="card-body">
-		@alert_success()
+		@alert_errors()
 		<table class="table table-responsive-sm bg-white table-hover border">
 			@include('order::tables.index.header')
 			<tbody>
+				@each('order::tables.index.row', $orders, 'order')
 				@include('order::tables.index.row')
 			</tbody>
 		</table>
-		<ul class="pagination mb-0">
-			<li class="page-item">
-				<a class="page-link" href="#">Anterior</a>
-			</li>
-			<li class="page-item active">
-				<a class="page-link" href="#">1</a>
-			</li>
-			<li class="page-item">
-				<a class="page-link" href="#">2</a>
-			</li>
-			<li class="page-item">
-				<a class="page-link" href="#">3</a>
-			</li>
-			<li class="page-item">
-				<a class="page-link" href="#">4</a>
-			</li>
-			<li class="page-item">
-				<a class="page-link" href="#">Proximo</a>
-			</li>
-		</ul>
-
+		{{ $orders->links() }}
 	</div>
 </div>
 

@@ -5,6 +5,9 @@ namespace Modules\Order\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Order\Http\Requests\OrderRequest;
+use Modules\Order\Repositories\OrderRepository;
+use Modules\Order\Entities\Order;
 
 class OrderController extends Controller
 {
@@ -13,6 +16,13 @@ class OrderController extends Controller
     {
         return view('order::index');
     }
+
+
+    public function store(OrderRequest $request){
+        OrderRepository::store($request->all());
+        return redirect()->route('orders.index')->with('success', 'Pedido cadastrado.');
+    }    
+
 
     public function edit(Request $request, $id, $tab = 0)
     {
