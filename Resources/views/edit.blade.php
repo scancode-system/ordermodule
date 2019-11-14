@@ -20,11 +20,11 @@
 		<nav>
 			<div class="nav nav-tabs" role="tablist">
 				<style>.leo:hover{border-top: 1px solid #c8ced3!important;}</style>
-				<a class="nav-item nav-link leo {{ ($tab==0)?'active border-top':'' }}" href="{{ route('orders.edit', [1, 0]) }}">Itens</a>
-				<a class="nav-item nav-link leo {{ ($tab==1)?'active border-top':'' }}" href="{{ route('orders.edit', [1, 1]) }}">Cliente</a>
-				<a class="nav-item nav-link leo {{ ($tab==2)?'active border-top':'' }}" href="{{ route('orders.edit', [1, 2]) }}">Representante</a>
-				<a class="nav-item nav-link leo {{ ($tab==3)?'active border-top':'' }}" href="{{ route('orders.edit', [1, 3]) }}">Pagamento</a>
-				<a class="nav-item nav-link leo {{ ($tab==4)?'active border-top':'' }}" href="{{ route('orders.edit', [1, 4]) }}">Observação</a>
+				<a class="nav-item nav-link leo {{ ($tab==0)?'active border-top':'' }}" href="{{ route('orders.edit', [$order->id, 0]) }}">Itens</a>
+				<a class="nav-item nav-link leo {{ ($tab==1)?'active border-top':'' }}" href="{{ route('orders.edit', [$order->id, 1]) }}">Cliente</a>
+				<a class="nav-item nav-link leo {{ ($tab==2)?'active border-top':'' }}" href="{{ route('orders.edit', [$order->id, 2]) }}">Representante</a>
+				<a class="nav-item nav-link leo {{ ($tab==3)?'active border-top':'' }}" href="{{ route('orders.edit', [$order->id, 3]) }}">Pagamento</a>
+				<a class="nav-item nav-link leo {{ ($tab==4)?'active border-top':'' }}" href="{{ route('orders.edit', [$order->id, 4]) }}">Observação</a>
 			</div>
 		</nav>
 	</div>

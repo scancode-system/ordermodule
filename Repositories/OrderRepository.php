@@ -41,5 +41,9 @@ class OrderRepository
 		$order->delete();
 	}
 
+	public function closing_order(){
+
+	}
+
 
 }
