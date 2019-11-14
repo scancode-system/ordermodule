@@ -12,6 +12,6 @@
 	<div class="col-md-5">{{ '(31)33333333' }}</div>
 </div>
 <hr>
-{{Form::open(['route' => ['orders.update.representative', '1'], 'method' => 'put']) }}
+{{Form::open(['route' => ['orders.update', '1'], 'method' => 'put']) }}
 {{ Form::button('<i class="fa fa-refresh"></i><span>Trocar de Representante</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 {{ Form::close() }}

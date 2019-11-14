@@ -18,7 +18,7 @@ class CreateOrderClientsTable extends Migration
 
             $table->unsignedBigInteger('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('client_id')->nullable();
+
             $table->string('corporate_name')->nullable();
             $table->string('fantasy_name')->nullable();
             $table->string('cpf_cnpj')->nullable();

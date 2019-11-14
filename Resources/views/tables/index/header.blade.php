@@ -6,6 +6,7 @@
 		<th>Representante</th>
 		<th class="text-center">Status</th>
 		<th class="text-center">Total</th>
+				<th class="text-center">Fechamento</th>
 		<th class="text-right">Ações</th>
 	</tr>
 </thead>

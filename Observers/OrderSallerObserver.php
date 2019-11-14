@@ -8,9 +8,9 @@ use Modules\Saller\Entities\Saller;
 class OrderSallerObserver
 {
 
-	public function updating(OrderSaller $order_saller)
+	public function creating(OrderSaller $order_saller)
 	{
-		$saller = Saller::find($order_saller->saller_id);
+		$saller = Saller::find($order_saller->order->saller_id);
 
 		$order_saller->name = $saller->name;
 		$order_saller->email = $saller->email;

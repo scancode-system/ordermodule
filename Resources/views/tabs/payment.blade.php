@@ -16,6 +16,6 @@
 	<div class="col-md-5">@percentage('34.54')</div>
 </div>
 <hr>
-{{Form::open(['route' => ['orders.update.payment', '1'], 'method' => 'put']) }}
+{{Form::open(['route' => ['orders.update', '1'], 'method' => 'put']) }}
 {{ Form::button('<i class="fa fa-refresh"></i><span>Trocar de Pagamento</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 {{ Form::close() }}

@@ -27,10 +27,8 @@ class OrderRepository
 	}
 
 
-	public static function storeClientSaller($client_id, $saller_id){
-		$order = Order::create([]);
-		$order->order_client->update(['client_id' => $client_id]);
-		$order->order_saller->update(['saller_id' => $saller_id]);
+	public static function store($data){
+		$order = Order::create($data);
 	}
 
 

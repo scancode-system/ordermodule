@@ -6,13 +6,13 @@
 	<div class="card-header border-bottom-0 d-flex align-items-center py-2 px-4 ">
 		<h5 class="mb-0 mr-4">Pedido #{{ '1' }}</h5>
 		<div>
-			{{ Form::select('product_category_id', ['Aberto', 'Concluido'], null,['class' => 'form-control']) }}
+			{{ Form::Open(['route' => ['orders.update.status', $order], 'method' => 'put']) }}
+			{{ Form::select('status_id', $select_statuses, $order->status_id ,['class' => 'form-control', 'id' => 'status_id']) }}
+			{{ Form::close() }}
 		</div>
 		<div class="btn-group ml-auto" role="group" aria-label="Basic example">
-			{{ Form::button('<i class="fa fa-file-pdf-o"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) }}
-			{{ Form::button('<i class="fa fa-eye"></i>', ['class' => 'btn  btn-secondary', 'type' => 'submit']) }}
-			{{ Form::button('<i class="fa fa-share-alt"></i>', ['class' => 'btn  btn-success', 'type' => 'submit']) }}
-			{{ Form::button('<i class="fa fa-trash"></i>', ['class' => 'btn  btn-danger', 'type' => 'submit']) }}
+			{{ Form::button('<i class="fa fa-file-pdf-o"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit']) }}
+			{{ Form::button('<i class="fa fa-share-alt"></i>', ['class' => 'btn btn-outline-info', 'type' => 'submit']) }}
 		</div>
 
 	</div>
@@ -29,6 +29,8 @@
 		</nav>
 	</div>
 	<div class="card-body">
+		@alert_errors()
+		@alert_success()
 		<div class="tab-content border-0">
 			<div class="tab-pane p-0 {{ ($tab==0)?'show active':'' }}" >
 				@include('order::tabs.items')
@@ -48,9 +50,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 @endsection
 
 @section('breadcrumb')
@@ -64,3 +63,12 @@
 	Pedido
 </li>
 @endsection
+
+
+@push('scripts')
+<script>
+	$('#status_id').change(function() {
+			this.form.submit();
+		});
+</script>
+@endpush

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +18,18 @@ Route::prefix('orders')->middleware('auth')->group(function() {
 	// post
 	Route::post('', 'OrderController@store')->name('orders.store');
 	// put
-	Route::put('{order}', 'OrderController@update')->name('orders.update');
-	Route::put('{order}/client', 'OrderController@updateClient')->name('orders.update.client');
-	Route::put('{order}/representative', 'OrderController@updateRepresentative')->name('orders.update.representative');
-	Route::put('{order}/payment', 'OrderController@updatePayment')->name('orders.update.payment');
+	Route::put('{order}', 'OrderController@update')->name('orders.update')->middleware('order-locked');
+	Route::put('{order}/status', 'OrderController@update')->name('orders.update.status');	
 	// delete
 	Route::delete('{order}/destroy', 'OrderController@destroy')->name('orders.destroy');
 });
 
-Route::prefix('order_items')->middleware('auth')->group(function() {
+
+Route::prefix('items')->middleware('auth')->group(function() {
 	// post
-	Route::post('', 'OrderItemController@store')->name('order_items.store');
+	Route::post('{order}', 'ItemController@store')->name('items.store')->middleware('order-locked');
 	// put
-	Route::put('{order_item}', 'OrderItemController@update')->name('order_items.update');
+	Route::put('{item}', 'ItemController@update')->name('items.update')->middleware('order-locked');
 	// delete
-	Route::delete('{order_item}/destroy', 'OrderItemController@destroy')->name('order_items.destroy');
+	Route::delete('{item}/destroy', 'ItemController@destroy')->name('items.destroy')->middleware('order-locked');
 });

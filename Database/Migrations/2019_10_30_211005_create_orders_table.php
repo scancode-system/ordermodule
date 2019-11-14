@@ -19,14 +19,13 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('status_id')->default('1');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('restrict')->onUpdate('cascade');
 
+            $table->bigInteger('client_id')->nullable();
+            $table->bigInteger('saller_id')->nullable();
+            $table->bigInteger('payment_id')->nullable();
+            $table->bigInteger('shipping_company_id')->nullable();
+
             $table->boolean('full_delivery')->default(true);
-
-            $table->text('observation')->nullable();
-            $table->text('signature')->nullable();
-
-            $table->boolean('change')->default(false);
             $table->dateTime('closing_date')->nullable();
-
             $table->timestamps();
         });
     }

@@ -58,6 +58,6 @@
 	<div class="col-md-5">{{ '30112098' }}</div>
 </div>
 <hr>
-{{Form::open(['route' => ['orders.update.client', '1'], 'method' => 'put']) }}
+{{Form::open(['route' => ['orders.update', '1'], 'method' => 'put']) }}
 {{ Form::button('<i class="fa fa-refresh"></i><span>Trocar de Cliente</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 {{ Form::close() }}

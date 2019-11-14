@@ -4,6 +4,10 @@ namespace Modules\Order\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Gate;
+use Modules\Order\Entities\Order;
+use Modules\Order\Entities\Status;
+
 
 class OrderServiceProvider extends ServiceProvider
 {
@@ -27,7 +31,9 @@ class OrderServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(ViewComposerServiceProvider::class);
-                $this->app->register(ObserverServiceProvider::class);
+        $this->app->register(ObserverServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
+        $this->app->register(MiddlewareServiceProvider::class);
     }
 
 
