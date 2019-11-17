@@ -23,20 +23,16 @@ Pedido #{{ $item->order->id }}
 	<div class="col">@currency($item->item_product->price)</div>
 </div>
 <div class="row justify-content-center mb-2">
+	<div class="col"><strong>Total Bruto: </strong></div>
+	<div class="col">@currency($item->total_gross)</div>
+</div>
+<div class="row justify-content-center mb-2">
 	<div class="col"><strong>Descontos: </strong></div>
-	<div class="col">@percentage($item->discount) - @currency($item->discount_value)</div>
+	<div class="col">@percentage($item->discount) - @currency($item->total_discount_value)</div>
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Acrescimos: </strong></div>
-	<div class="col">@percentage($item->addition) - @currency($item->addition_value)</div>
-</div>
-<div class="row justify-content-center mb-2">
-	<div class="col"><strong>Impostos: </strong></div>
-	<div class="col">@percentage($item->tax) - @currency($item->tax_value)</div>
-</div>
-<div class="row justify-content-center mb-2">
-	<div class="col"><strong>Total Bruto: </strong></div>
-	<div class="col">@currency($item->total_gross)</div>
+	<div class="col">@percentage($item->addition) - @currency($item->total_addition_value)</div>
 </div>
 <div class="row justify-content-center">
 	<div class="col"><strong>Total: </strong></div>

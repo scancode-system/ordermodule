@@ -1,4 +1,4 @@
-@modal_view(['modal_id' => 'orders_show_1', 'edit_route' => 'orders.edit', 'model_id' => '2'])
+@modal_view(['modal_id' => 'orders_show_'.$order->id, 'edit_route' => 'orders.edit', 'model_id' => $order->id])
 
 @slot('title')
 Pedido #{{ $order->id }}
@@ -54,10 +54,6 @@ Pedido #{{ $order->id }}
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Acréscimo: </strong></div>
 	<div class="col">@currency($order->addition_value)</div>
-</div>
-<div class="row justify-content-center mb-2">
-	<div class="col"><strong>Imposto: </strong></div>
-	<div class="col">@currency($order->tax_amount)</div>
 </div>
 <div class="row justify-content-center">
 	<div class="col"><strong>Total: </strong></div>

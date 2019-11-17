@@ -18,7 +18,8 @@ class CreateOrderPaymentsTable extends Migration
 
             $table->unsignedBigInteger('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            
+
+            $table->bigInteger('payment_id')->nullable();            
             $table->string('description')->nullable();
             $table->decimal('min_value', 10, 2)->nullable();
             $table->decimal('discount', 5, 2)->nullable();

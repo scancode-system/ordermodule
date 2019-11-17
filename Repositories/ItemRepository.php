@@ -8,13 +8,16 @@ class ItemRepository
 {
 
 
-	public static function list($search = '', $limit = 10){
+	public static function list($order = null, $search = '', $limit = 10){
 		$items =  Item::orWhereHas('item_product', function($query) use ($search) {
 			$query->where('description', 'like', '%'.$search.'%')->
 			orWhere('sku', 'like', '%'.$search.'%');
 		})->
-		with(['item_product'])->
-		paginate($limit);
+		with(['item_product']);
+		if($order){
+			$items->where('order_id', $order->id);
+		}
+		$items = $items->paginate($limit);
 
 		$items->appends(request()->query());
 		return $items;

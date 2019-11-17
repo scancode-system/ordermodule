@@ -17,10 +17,58 @@
 	@include('order::items.tables.header')
 	<tbody>
 		@foreach($items as $item)
-			@include('order::items.tables.row')
+		@include('order::items.tables.row')
 		@endforeach
 	</tbody>
 </table>
 {{ $items->links() }}
-
 @include('order::items.modals.modal_create_items', ['modal_id' => 'modal_create_order_items', 'item' => null])
+
+
+<div class="row">
+	<div class="col-6 col-lg-3">
+		<div class="card mb-0">
+			<div class="card-body p-0 d-flex align-items-center">
+				<i class="fa fa-money bg-primary p-4 px-5 font-2xl mr-3"></i>
+				<div>
+					<div class="text-value-sm text-primary">@currency($order->total_gross)</div>
+					<div class="text-muted text-uppercase font-weight-bold small">Total Bruto</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-6 col-lg-3">
+		<div class="card mb-0">
+			<div class="card-body p-0 d-flex align-items-center">
+				<i class="fa fa-tag bg-info p-4 px-5 font-2xl mr-3"></i>
+				<div>
+					<div class="text-value-sm text-info">@currency($order->discount_value)</div>
+					<div class="text-muted text-uppercase font-weight-bold small">Desconto</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-6 col-lg-3">
+		<div class="card mb-0">
+			<div class="card-body p-0 d-flex align-items-center">
+				<i class="fa fa-line-chart bg-secondary p-4 px-5 font-2xl mr-3"></i>
+				<div>
+					<div class="text-value-sm text-secondary">@currency($order->addition_value)</div>
+					<div class="text-muted text-uppercase font-weight-bold small">Acrescimo</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-6 col-lg-3">
+		<div class="card mb-0">
+			<div class="card-body p-0 d-flex align-items-center">
+				<i class="fa fa-money bg-danger p-4 px-5 font-2xl mr-3"></i>
+				<div>
+					<div class="text-value-sm text-danger">@currency($order->total)</div>
+					<div class="text-muted text-uppercase font-weight-bold small">Total</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

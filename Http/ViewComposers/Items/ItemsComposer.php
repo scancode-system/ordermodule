@@ -5,6 +5,7 @@ namespace Modules\Order\Http\ViewComposers\Items;
 use Modules\Dashboard\Services\ViewComposer\ServiceComposer;
 use Modules\Order\Repositories\ItemRepository;
 use Modules\Product\Repositories\ProductRepository;
+use Modules\Product\Repositories\OrderRepository;
 
 
 class ItemsComposer extends ServiceComposer {
@@ -32,7 +33,7 @@ class ItemsComposer extends ServiceComposer {
 
 
     private function items(){
-        $this->items = ItemRepository::list($this->search);
+        $this->items = ItemRepository::list(request()->route('order'), $this->search);
     }
 
 

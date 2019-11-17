@@ -4,17 +4,16 @@
 <div class="card">
 	
 	<div class="card-header border-bottom-0 d-flex align-items-center py-2 px-4 ">
-		<h5 class="mb-0 mr-4">Pedido #{{ '1' }}</h5>
+		<h5 class="mb-0 mr-4">Pedido #{{ $order->id }}</h5>
 		<div>
 			{{ Form::Open(['route' => ['orders.update.status', $order], 'method' => 'put']) }}
 			{{ Form::select('status_id', $select_statuses, $order->status_id ,['class' => 'form-control', 'id' => 'status_id']) }}
 			{{ Form::close() }}
 		</div>
-		<div class="btn-group ml-auto" role="group" aria-label="Basic example">
-			{{ Form::button('<i class="fa fa-file-pdf-o"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit']) }}
-			{{ Form::button('<i class="fa fa-share-alt"></i>', ['class' => 'btn btn-outline-info', 'type' => 'submit']) }}
-		</div>
-
+			<a href="{{ route('orders.pdf', $order) }}" target="_blank" class="btn btn-outline-danger ml-auto mr-3"><i class="fa fa-file-pdf-o"></i> PDF</a>
+			{{ Form::open(['route' => ['orders.clone', $order]]) }}
+			{{ Form::button('<i class="fa fa-share-alt"></i> Clonar Pedido', ['class' => 'btn btn-outline-primary', 'type' => 'submit']) }}
+			{{ Form::close() }}
 	</div>
 	<div class="card-header">
 		<nav>
@@ -39,7 +38,7 @@
 				@include('order::tabs.client')
 			</div>
 			<div class="tab-pane p-0 {{ ($tab==2)?'show active':'' }}">
-				@include('order::tabs.representative')
+				@include('order::tabs.saller')
 			</div>
 			<div class="tab-pane p-0 {{ ($tab==3)?'show active':'' }}">
 				@include('order::tabs.payment')

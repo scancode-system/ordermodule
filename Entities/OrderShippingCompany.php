@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderShippingCompany extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['order_id', 'shipping_company_id'];
 }

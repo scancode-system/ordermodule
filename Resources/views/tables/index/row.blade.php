@@ -15,5 +15,5 @@
 			</div>
 		</td>
 		@include('order::modals.modal_show_orders')
-		@modal_destroy(['route_destroy' => 'orders.destroy', 'model' => 1, 'modal_id' => 'orders_destroy_1'])
+		@modal_destroy(['route_destroy' => 'orders.destroy', 'model' => $order->id, 'modal_id' => 'orders_destroy_'.$order->id])
 	</tr>

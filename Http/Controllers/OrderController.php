@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use Modules\Order\Http\Requests\OrderRequest;
 use Modules\Order\Repositories\OrderRepository;
 use Modules\Order\Entities\Order;
+use Modules\Order\Services\PDFService;
+
 
 class OrderController extends Controller
 {
@@ -39,6 +41,16 @@ class OrderController extends Controller
     public function destroy(Request $request, Order $order){
         OrderRepository::destroy($order);
         return back()->with('success', 'Pedido deletado.');
+    }
+
+    public function pdf(Request $request, Order $order){
+        $pdf_service = new PDFService($order);
+        return $pdf_service->download();
+    }
+
+    public function clone(Request $request, Order $order){
+        $new_order = OrderRepository::clone($order);
+        return redirect()->route('orders.edit', $new_order)->with('success', 'Pedido '.$new_order->id.' criado como clone do pedido '.$order->id.'.');
     }
 
 }

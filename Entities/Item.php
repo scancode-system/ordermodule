@@ -25,46 +25,34 @@ class Item extends Model
 	// accessors
 	public function getTotalAttribute($value)
 	{
-		return 0;
+		return $this->total_gross-$this->total_discount_value+$this->total_addition_value;
 	}
 
 	public function getTotalGrossAttribute($value)
 	{
-		return 0;
+		return $this->item_product->price*$this->qty;
 	}
-
-
-	public function getDiscountAttribute($value)
-	{
-		return 0;
-	}
-
 
 	public function getDiscountValueAttribute($value)
 	{
-		return 0;
+		return ($this->item_product->price*$this->discount)/100;
 	}
 
-
-	public function getAdditionAttribute($value)
+	public function getTotalDiscountValueAttribute($value)
 	{
-		return 0;
+		return $this->discount_value*$this->qty;
 	}
 
 
 	public function getAdditionValueAttribute($value)
 	{
-		return 0;
+		return ($this->item_product->price*$this->addition)/100;
 	}
 
-
-	public function getTaxAttribute($value)
+	public function getTotalAdditionValueAttribute($value)
 	{
-		return 0;
+		return $this->addition_value*$this->qty;
 	}
 
-	public function getTaxValueAttribute($value)
-	{
-		return 0;
-	}
+
 }

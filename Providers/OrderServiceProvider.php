@@ -18,6 +18,7 @@ class OrderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+                $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
@@ -34,6 +35,23 @@ class OrderServiceProvider extends ServiceProvider
         $this->app->register(ObserverServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(MiddlewareServiceProvider::class);
+    }
+
+
+
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->publishes([
+            __DIR__.'/../Config/snappy.php' => config_path('snappy.php'),
+        ], 'config');
+        /*$this->mergeConfigFrom(
+            __DIR__.'/../Config/config.php', 'order'
+        );*/
     }
 
 

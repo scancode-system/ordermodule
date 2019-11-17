@@ -5,6 +5,7 @@
 		<td class="align-middle">{{ $item->item_product->sku }}</td>
 		<td class="align-middle">{{ $item->item_product->description }}</td>
 		<td class="align-middle text-center">@currency($item->item_product->price)</td>
+		<td class="align-middle text-center">@currency($item->discount_value)</td>
 		<td class="align-middle text-center">{{ $item->qty }} Unidades</td>
 		<td class="align-middle text-center">@currency($item->total)</td>
 		<td class="text-right align-middle">

@@ -8,12 +8,13 @@ use Modules\Order\Entities\OrderSaller;
 use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
+use Modules\Order\Entities\Item;
 
 
 class Order extends Model
 {
 
-	protected $guarded = [];
+	protected $fillable = ['id', 'status_id', 'full_delivery', 'closing_date', 'observation', 'signature'];
 
 
 	public function status()
@@ -45,36 +46,50 @@ class Order extends Model
 		return $this->hasOne(OrderShippingCompany::class);
 	}
 
+	public function items()
+	{
+		return $this->hasMany(Item::class);
+	}
+
 
 	// accessors
 	public function getTotalAttribute($value)
 	{
-		return 0;
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->total;
+		}
+		return $sum;
 	}
 
 
 	public function getTotalGrossAttribute($value)
 	{
-		return 0;
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->total_gross;
+		}
+		return $sum;
 	}
 
 
 	public function getDiscountValueAttribute($value)
 	{
-		return 0;
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->total_discount_value;
+		}
+		return $sum;
 	}
 
 	public function getAdditionValueAttribute($value)
 	{
-		return 0;
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->total_addition_value;
+		}
+		return $sum;
 	}
-
-
-	public function getTaxAmountAttribute($value)
-	{
-		return 0;
-	}
-
 
 
 	public function getNumberItemsAttribute($value)

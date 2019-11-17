@@ -17,13 +17,21 @@
 		<div class="col">
 			<div class="form-group mb-0">
 				{{ Form::label('qty', 'Quantidade') }}
+				@if(isset($item))
+				{{ Form::number('qty', $item->qty, ['class' => 'form-control']) }}
+				@else
 				{{ Form::number('qty', old('qty'), ['class' => 'form-control']) }}
+				@endif
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group mb-0">
 				{{ Form::label('discount', 'Desconto') }}
+				@if(isset($item))
+				{{ Form::number('discount', $item->discount, ['class' => 'form-control']) }}
+				@else
 				{{ Form::number('discount', old('discount'), ['class' => 'form-control']) }}
+				@endif
 			</div>
 		</div>
 	</div>

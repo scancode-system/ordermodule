@@ -8,7 +8,7 @@ use Modules\Order\Entities\Order;
 
 class OrderClient extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['order_id', 'client_id'];
 
     public function order_client_address()
 	{
