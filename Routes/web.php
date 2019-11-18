@@ -41,3 +41,7 @@ Route::prefix('setting_order')->middleware('auth')->group(function() {
 	Route::put('', 'SettingOrderController@update')->name('setting_order.update');
 
 });
+
+Route::prefix('reports')->middleware('auth')->group(function() {
+	Route::get('orders', 'ReportController@order')->name('reports.orders');
+});

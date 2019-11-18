@@ -30,6 +30,13 @@ class OrderRepository
 		return $orders;
 	}
 
+	public static function loadClosedOrders(){
+		$orders =  Order::where('status_id', 1)->
+		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
+		get();
+		return $orders;
+	}
+
 
 	public static function store($data){
 		$order = Order::create($data);

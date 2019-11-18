@@ -38,6 +38,6 @@ class Multiple implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Precisa ser múltiplo de '.$this->multiple.'.';
     }
 }
