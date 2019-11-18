@@ -1,6 +1,6 @@
 <table class="w-100">
 	<tr>
-		<td>{{ 'Evento XYZ Implementar ainda' }}</td>
+		<td>{{ $setting_order->pdf_title }}</td>
 		<td class="text-right">Pedido: {{ $order->id }}</td>
 	</tr>
 </table>

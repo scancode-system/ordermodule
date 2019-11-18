@@ -10,7 +10,7 @@ use Modules\Order\Http\ViewComposers\Items\ItemsComposer;
 use Modules\Order\Http\ViewComposers\Tabs\PaymentComposer;
 use Modules\Order\Http\ViewComposers\Tabs\SallerComposer;
 use Modules\Order\Http\ViewComposers\Tabs\ClientComposer;
-
+use Modules\Order\Http\ViewComposers\Settings\SettingComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider {
 
@@ -22,9 +22,10 @@ class ViewComposerServiceProvider extends ServiceProvider {
 		View::composer('order::tabs.payment', PaymentComposer::class);
 		View::composer('order::tabs.saller', SallerComposer::class);
 		View::composer('order::tabs.client', ClientComposer::class);
-
 		// item
 		View::composer('order::items.items', ItemsComposer::class);
+		// setting
+		View::composer('order::loader.settings.body', SettingComposer::class);
 	}
 
 	public function register() {

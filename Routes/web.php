@@ -35,3 +35,9 @@ Route::prefix('items')->middleware('auth')->group(function() {
 	// delete
 	Route::delete('{item}/destroy', 'ItemController@destroy')->name('items.destroy')->middleware('order-locked');
 });
+
+
+Route::prefix('setting_order')->middleware('auth')->group(function() {
+	Route::put('', 'SettingOrderController@update')->name('setting_order.update');
+
+});

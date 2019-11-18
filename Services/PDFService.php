@@ -6,6 +6,7 @@ namespace Modules\Order\Services;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Modules\Order\Entities\Order;
 use Modules\Dashboard\Repositories\CompanyRepository;
+use Modules\Order\Repositories\SettingOrderRepository;
 
 use Nwidart\Modules\Facades\Module;
 
@@ -16,7 +17,8 @@ class PDFService {
 
 	public function __construct(Order $order) {
 		$this->order = $order;
-		$this->pdf = PDF::loadView($this->getView(), ['order' => $this->order, 'company' => CompanyRepository::company()]);
+		$this->setting_order = SettingOrderRepository::load();
+		$this->pdf = PDF::loadView($this->getView(), ['order' => $this->order, 'company' => CompanyRepository::company(), 'setting_order' => $this->setting_order]);
 	}
 
 	private function getView(){
