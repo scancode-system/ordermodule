@@ -7,6 +7,7 @@ use Modules\Order\Entities\OrderClient;
 use Modules\Order\Entities\OrderSaller;
 use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
+use Modules\Order\Entities\Status;
 
 class OrderRepository
 {
@@ -31,7 +32,8 @@ class OrderRepository
 	}
 
 	public static function loadClosedOrders(){
-		$orders =  Order::where('status_id', 1)->
+		$orders =  Order::
+		where('status_id', Status::CONCLUIDO)->
 		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
 		get();
 		return $orders;

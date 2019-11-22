@@ -3,6 +3,9 @@
 namespace Modules\Order\Repositories;
 
 use Modules\Order\Entities\Item;
+use Modules\Order\Entities\Status;
+use Modules\Product\Entities\Product;
+
 
 class ItemRepository
 {
@@ -38,5 +41,55 @@ class ItemRepository
 		$item->delete();
 	}
 
+
+	public static function loadItemsClosedOrders(){
+		$items = Item::
+		whereHas('order', function ($query) {
+    		$query->where('status_id', Status::CONCLUIDO);
+		})->
+		orderBy('order_id')->
+		get();
+
+		return $items;
+	}
+
+
+	public static function loadSoldItemsByProduct(Product $product){
+		return Item::whereHas('order', function ($query) {
+    		$query->where('status_id', Status::CONCLUIDO);
+		})->
+		where('product_id', $product->id)->get();
+	}
+
+
+/*
+	public static function loadProductsSold(){
+		$items = Item::whereHas('order', function ($query) {
+    		//$query->where('status_id', Status::CONCLUIDO);
+		})->groupBy(['product_id'])->get(['product_id']);
+		$ids = [];
+		foreach ($items as $item) {
+			array_push($ids, $item->product_id);
+		}
+
+		return $ids;
+	}
+
+	public static function getProductsIdSold(){
+		$items = Item::whereHas('order', function ($query) {
+    		//$query->where('status_id', Status::CONCLUIDO);
+		})->groupBy(['product_id'])->get(['product_id']);
+		$ids = [];
+		foreach ($items as $item) {
+			array_push($ids, $item->product_id);
+		}
+
+		return $ids;
+	}
+
+	public static function loadByProductId($id){
+		return Item::where('product_id', $id)->first();
+	}
+*/
 
 }

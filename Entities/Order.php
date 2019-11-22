@@ -15,6 +15,9 @@ class Order extends Model
 {
 
 	protected $fillable = ['id', 'status_id', 'full_delivery', 'closing_date', 'observation', 'signature'];
+	protected $dates = [
+        'closing_date'
+    ];
 
 
 	public function status()
@@ -53,6 +56,15 @@ class Order extends Model
 
 
 	// accessors
+	public function getTotalItemsAttribute($value)
+	{
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->qty;
+		}
+		return $sum;
+	}
+
 	public function getTotalAttribute($value)
 	{
 		$sum = 0;

@@ -19,7 +19,7 @@ class CreateOrderShippingCompaniesTable extends Migration
             $table->unsignedBigInteger('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             
-            $table->bigInteger('shipping_company_id')->nullable();
+            $table->unsignedBigInteger('shipping_company_id')->nullable();
             $table->string('description')->nullable();
 
             $table->timestamps();

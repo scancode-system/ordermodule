@@ -43,5 +43,12 @@ Route::prefix('setting_order')->middleware('auth')->group(function() {
 });
 
 Route::prefix('reports')->middleware('auth')->group(function() {
-	Route::get('orders', 'ReportController@order')->name('reports.orders');
+	Route::get('orders', 'ReportController@orders')->name('reports.orders');
+	Route::get('orders/full', 'ReportController@ordersFull')->name('reports.orders.full');
+
+	Route::get('items', 'ReportController@items')->name('reports.items');
+	Route::get('items/full', 'ReportController@itemsFull')->name('reports.items.full');
+
+	Route::get('products', 'ReportController@products')->name('reports.products');
+	Route::get('products/full', 'ReportController@productsFull')->name('reports.products.full');
 });

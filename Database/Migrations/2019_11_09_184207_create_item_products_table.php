@@ -21,7 +21,7 @@ class CreateItemProductsTable extends Migration
             
             $table->string('sku')->nullable();
             $table->string('description')->nullable();
-            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('price', 10, 2);
             $table->string('category')->nullable();
 
             $table->timestamps();

@@ -5,6 +5,7 @@ namespace Modules\Order\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Order\Entities\ItemProduct;
 use Modules\Order\Entities\Order;
+use Modules\Product\Entities\Product;
 
 class Item extends Model
 {
@@ -15,11 +16,15 @@ class Item extends Model
 		return $this->belongsTo(Order::class);
 	}
 
+	public function product()
+	{
+		return $this->belongsTo(Product::class);
+	}
+
 	public function item_product()
 	{
 		return $this->hasOne(ItemProduct::class);
 	}
-
 
 
 	// accessors
@@ -30,12 +35,12 @@ class Item extends Model
 
 	public function getTotalGrossAttribute($value)
 	{
-		return $this->item_product->price*$this->qty;
+		return $this->price*$this->qty;
 	}
 
 	public function getDiscountValueAttribute($value)
 	{
-		return ($this->item_product->price*$this->discount)/100;
+		return ($this->price*$this->discount)/100;
 	}
 
 	public function getTotalDiscountValueAttribute($value)
@@ -46,7 +51,7 @@ class Item extends Model
 
 	public function getAdditionValueAttribute($value)
 	{
-		return ($this->item_product->price*$this->addition)/100;
+		return ($this->price*$this->addition)/100;
 	}
 
 	public function getTotalAdditionValueAttribute($value)

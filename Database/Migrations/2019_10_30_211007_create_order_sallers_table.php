@@ -19,9 +19,11 @@ class CreateOrderSallersTable extends Migration
             $table->unsignedBigInteger('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->bigInteger('saller_id')->nullable();
-          $table->string('name')->nullable();
-           $table->string('email')->nullable();
+            $table->unsignedBigInteger('saller_id')->nullable();
+            $table->foreign('saller_id')->references('id')->on('sallers')->onDelete('restrict')->onUpdate('cascade');
+
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
 
             $table->timestamps();
         });

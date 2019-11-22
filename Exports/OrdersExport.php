@@ -19,7 +19,7 @@ class OrdersExport implements FromCollection, WithStrictNullComparison
     }
 
     private function header(){
-    	return [['codigo', 'total', 'comprador', 'email', 'telefone', 'razao_social', 'cpf_cnpj', 'representante']];
+    	return [['codigo', 'concluido', 'total', 'pagamento', 'comprador', 'email', 'telefone', 'representante']];
     }
 
 
@@ -30,26 +30,35 @@ class OrdersExport implements FromCollection, WithStrictNullComparison
     	foreach ($orders as $order) {
     		array_push($body, [
     			$this->codigo($order),
-    			$this->total($order),
-    			$this->comprador($order),
-    			$this->email($order),
-    			$this->telefone($order),
-    			$this->razao_social($order),
-    			$this->cpf_cnpj($order),
-    			$this->representante($order),
-    		]);
+                $this->concluido($order),
+                $this->total($order),
+                $this->pagamento($order),
+                $this->comprador($order),
+                $this->email($order),
+                $this->telefone($order),
+                $this->representante($order),
+            ]);
     	}
 
-    	return $body;
+        return (new Collection($body))->sortByDesc('total')->toArray();
     }
 
     private function codigo($order){
     	return $order->id;
     }
 
+    private function concluido($order){
+        return $order->closing_date;
+    }
+
     private function total($order){
     	return $order->total;
     }
+
+    private function pagamento($order){
+        return $order->order_payment->description;
+    }
+
 
     private function comprador($order){
     	return $order->order_client->buyer;
@@ -61,14 +70,6 @@ class OrdersExport implements FromCollection, WithStrictNullComparison
 
     private function telefone($order){
     	return $order->order_client->phone;
-    }
-
-    private function razao_social($order){
-    	return $order->order_client->corporate_name;
-    }
-
-    private function cpf_cnpj($order){
-    	return $order->order_client->cpf_cnpj;
     }
 
     private function representante($order){

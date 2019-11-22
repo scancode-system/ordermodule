@@ -43,11 +43,13 @@ class ItemRequest extends FormRequest
                     return $query->where('order_id', $order_id)
                     ->where('product_id', $product_id);
                 })],
-                'qty' => ['required', 'integer', 'min:'.$min_qty, new Multiple($multiple)]
+                'qty' => ['required', 'integer', 'min:'.$min_qty, new Multiple($multiple)],
+                'discount' => 'numeric|min:0|max:100|regex:/^\d+(\.\d{1,2})?$/'
             ];
         } else if(request()->method() == 'PUT'){
             return [
-                'qty' => ['required', 'integer', 'min:'.$min_qty, new Multiple($multiple)]
+                'qty' => ['required', 'integer', 'min:'.$min_qty, new Multiple($multiple)],
+                'discount' => 'numeric|min:0|max:100|regex:/^\d+(\.\d{1,2})?$/'
             ];
         }
     }

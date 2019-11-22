@@ -20,7 +20,7 @@
 				@if(isset($item))
 				{{ Form::number('qty', $item->qty, ['class' => 'form-control']) }}
 				@else
-				{{ Form::number('qty', old('qty'), ['class' => 'form-control']) }}
+				{{ Form::number('qty', old('qty', 1), ['class' => 'form-control']) }}
 				@endif
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 				@if(isset($item))
 				{{ Form::number('discount', $item->discount, ['class' => 'form-control']) }}
 				@else
-				{{ Form::number('discount', old('discount'), ['class' => 'form-control']) }}
+				{{ Form::number('discount', old('discount', 0), ['class' => 'form-control']) }}
 				@endif
 			</div>
 		</div>
