@@ -18,7 +18,7 @@ class OrderObserver
 	public function updating(Order $order)
 	{
 		if($order->isDirty('status_id')){
-			if($order->status_id == STATUS::CONCLUIDO){
+			if($order->status_id == STATUS::COMPLETED){
 				if(is_null($order->order_client->client_id) || is_null($order->order_saller->saller_id) || is_null($order->order_payment->payment_id))	{
 					throw new RedirectBackException('O Pedido não pode ser fechado é necessário que tanto cliente, representante e pagamento seja selecionado.');
 				} else {

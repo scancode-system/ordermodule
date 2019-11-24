@@ -45,7 +45,7 @@ class ItemRepository
 	public static function loadItemsClosedOrders(){
 		$items = Item::
 		whereHas('order', function ($query) {
-    		$query->where('status_id', Status::CONCLUIDO);
+    		$query->where('status_id', Status::COMPLETED);
 		})->
 		orderBy('order_id')->
 		get();
@@ -56,7 +56,7 @@ class ItemRepository
 
 	public static function loadSoldItemsByProduct(Product $product){
 		return Item::whereHas('order', function ($query) {
-    		$query->where('status_id', Status::CONCLUIDO);
+    		$query->where('status_id', Status::COMPLETED);
 		})->
 		where('product_id', $product->id)->get();
 	}

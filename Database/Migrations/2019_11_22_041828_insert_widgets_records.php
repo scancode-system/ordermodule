@@ -29,9 +29,7 @@ class InsertWidgetsRecords extends Migration
 
             ['name' => 'Tabela - Produtos mais vendidos', 'columns' => 12, 'view' => 'order::widgets.table_products_best_sold'],
             
-            ['name' => 'Gráfico - Performace dos Representantes', 'columns' => 12, 'view' => 'order::widgets.chart_performace_saller']
-
-            ['name' => 'Gráfico Donut - Produto Categorias', 'columns' => 12, 'view' => 'order::widgets.donut_chart_product_category'],            
+            ['name' => 'Gráfico Donut - Produto Categorias', 'columns' => 12, 'view' => 'order::widgets.donut_chart_product_category']         
         ]);
     }
 
@@ -55,8 +53,6 @@ class InsertWidgetsRecords extends Migration
         WidgetRepository::removeByName('Mini Info - Produtos');
 
         WidgetRepository::removeByName('Tabela - Produtos mais vendidos');
-
-        WidgetRepository::removeByName('Gráfico - Performace dos Representantes');
 
         WidgetRepository::removeByName('Gráfico Donut - Produto Categorias');
     }

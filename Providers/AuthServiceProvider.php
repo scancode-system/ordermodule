@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
                 $order = $item->order;
             }
             if($order instanceof Order){
-                return ($order->status_id == Status::ABERTO);
+                return ($order->status_id == Status::OPEN);
             }
         });
     }

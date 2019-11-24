@@ -8,25 +8,25 @@ class Status extends Model
 {
 	protected $guarded = [];
 
-	const ABERTO = 1;
-	const CONCLUIDO = 2;
-	const CANCELADO = 3;
-	const RESERVADO = 4;
+	const OPEN = 1;
+	const COMPLETED = 2;
+	const CANCELED = 3;
+	const RESERVED = 4;
 
 	public function getColorAttribute($value)
 	{
 		$color = '';
 		switch ($this->id) {
-			case self::ABERTO:
+			case self::OPEN:
 			$color =  'success';
 			break;
-			case self::CONCLUIDO:
+			case self::COMPLETED:
 			$color = 'primary';
 			break;
-			case self::CANCELADO:
+			case self::CANCELED:
 			$color = 'danger';
 			break;
-			case self::RESERVADO:
+			case self::RESERVED:
 			$color = 'info';
 			break;			
 			default:

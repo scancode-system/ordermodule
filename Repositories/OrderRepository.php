@@ -8,6 +8,7 @@ use Modules\Order\Entities\OrderSaller;
 use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
+use Carbon\Carbon;
 
 class OrderRepository
 {
@@ -33,7 +34,7 @@ class OrderRepository
 
 	public static function loadClosedOrders(){
 		$orders =  Order::
-		where('status_id', Status::CONCLUIDO)->
+		where('status_id', Status::COMPLETED)->
 		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
 		get();
 		return $orders;
@@ -82,5 +83,30 @@ class OrderRepository
 		return $order_cloned;
 	}
 
+
+	public static function loadAllWithAllInfo(){
+		return Order::with(['status', 'order_client', 'order_client.order_client_address', 'order_saller', 'order_payment', 'items', 'items.item_product'])->get();
+	}
+
+
+	public static function totalSoldByHours(){
+		$orders = Order::
+		where('status_id', Status::COMPLETED)->get();
+		$orders_grouped = $orders->groupBy(function($order){
+			return $order->closing_date->format('H:00');                                                                           
+		});
+
+		$sales_hour = [];
+
+		foreach ($orders_grouped as $hour => $orders) {
+			$sum = 0;
+			foreach ($orders as $key => $order) {
+				$sum += $order->total;
+			}
+			$sales_hour[$hour] = $sum;
+		}
+
+		return $sales_hour;
+	}
 
 }
