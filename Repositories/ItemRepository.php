@@ -36,6 +36,12 @@ class ItemRepository
 		$item->update($data);
 	}
 
+	public static function updateItemsDiscount($items, $discount){
+		foreach ($items as $item) {
+			self::update($item, ['discount' => $discount]);
+		}
+	}
+
 
 	public static function destroy(Item $item){
 		$item->delete();
@@ -45,7 +51,7 @@ class ItemRepository
 	public static function loadItemsClosedOrders(){
 		$items = Item::
 		whereHas('order', function ($query) {
-    		$query->where('status_id', Status::COMPLETED);
+			$query->where('status_id', Status::COMPLETED);
 		})->
 		orderBy('order_id')->
 		get();
@@ -56,7 +62,7 @@ class ItemRepository
 
 	public static function loadSoldItemsByProduct(Product $product){
 		return Item::whereHas('order', function ($query) {
-    		$query->where('status_id', Status::COMPLETED);
+			$query->where('status_id', Status::COMPLETED);
 		})->
 		where('product_id', $product->id)->get();
 	}

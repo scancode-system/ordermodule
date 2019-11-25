@@ -4,6 +4,7 @@ namespace Modules\order\Http\ViewComposers\Widgets;
 
 use Modules\Dashboard\Services\ViewComposer\ServiceComposer;
 use Modules\Order\Repositories\OrderRepository;
+use Illuminate\Support\Collection;
 
 class MiniChartSallerComposer extends ServiceComposer {
 
@@ -23,7 +24,7 @@ class MiniChartSallerComposer extends ServiceComposer {
 
 
     private function sales_names($orders_completed){
-        $this->sales_names = [];
+        $this->sales_names = new Collection();
 
         $orders_today = $orders_completed->filter(function ($order, $key) {
             return $order->closing_date->isToday();
@@ -34,22 +35,22 @@ class MiniChartSallerComposer extends ServiceComposer {
         foreach ($orders_sallers as $key => $orders_saller) {
             $name = $orders_saller->first()->order_saller->name;
             $total = $orders_saller->sum('total');
-            $this->sales_names[$name] = $total; 
+            $this->sales_names->put($name, $total);
         }
 
-        $this->sales_names = collect($this->sales_names)->sort()->reverse()->slice(0, 5)->toArray();
+        $this->sales_names = $this->sales_names->sort()->reverse()->slice(0, 5);
     }
 
     private function names(){
-        $this->names = array_keys($this->sales_names);
+        $this->names = $this->sales_names->keys();
     }
 
     private function sales(){
-        $this->sales = array_values($this->sales_names);
+        $this->sales = $this->sales_names->values();
     }
 
     private function best(){
-        $this->best = $this->names[0];
+        $this->best = $this->names->first();
     }
 
     public function view($view){

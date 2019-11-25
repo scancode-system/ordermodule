@@ -7,8 +7,10 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Order\Http\Requests\OrderRequest;
 use Modules\Order\Repositories\OrderRepository;
+use Modules\Order\Repositories\ItemRepository;
 use Modules\Order\Entities\Order;
 use Modules\Order\Services\PDFService;
+use \Exception;
 
 
 class OrderController extends Controller
@@ -21,8 +23,8 @@ class OrderController extends Controller
 
 
     public function store(OrderRequest $request){
-        OrderRepository::store($request->all());
-        return redirect()->route('orders.index')->with('success', 'Pedido cadastrado.');
+        $order = OrderRepository::store($request->all());
+        return redirect()->route('orders.edit', $order)->with('success', 'Pedido de código #'.$order->id.' cadastrado.');
     }    
 
 
@@ -39,6 +41,9 @@ class OrderController extends Controller
 
 
     public function destroy(Request $request, Order $order){
+        foreach ($order->items as $item) {
+            ItemRepository::destroy($item);
+        }
         OrderRepository::destroy($order);
         return back()->with('success', 'Pedido deletado.');
     }
@@ -49,8 +54,12 @@ class OrderController extends Controller
     }
 
     public function clone(Request $request, Order $order){
-        $new_order = OrderRepository::clone($order);
-        return redirect()->route('orders.edit', $new_order)->with('success', 'Pedido '.$new_order->id.' criado como clone do pedido '.$order->id.'.');
+        try{
+            $new_order = OrderRepository::clone($order);
+            return redirect()->route('orders.edit', $new_order)->with('success', 'Pedido '.$new_order->id.' criado como clone do pedido '.$order->id.'.');
+        } catch (Exception $e){
+            return back()->withErrors(['O Pedido não pode ser totalmente clonado, pois não há estoque suficiente de produtos.']);
+        }     
     }
 
 }

@@ -19,10 +19,11 @@ class CreateItemProductsTable extends Migration
             $table->unsignedBigInteger('item_id')->unique();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');            
             
-            $table->string('sku')->nullable();
-            $table->string('description')->nullable();
+            $table->string('sku');
+            $table->string('description');
             $table->decimal('price', 10, 2);
-            $table->string('category')->nullable();
+            $table->string('category');
+            $table->decimal('discount_limit', 10, 2)->default(100);
 
             $table->timestamps();
         });

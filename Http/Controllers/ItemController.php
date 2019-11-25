@@ -9,6 +9,7 @@ use Modules\Order\Http\Requests\ItemRequest;
 use Modules\Order\Repositories\ItemRepository;
 use Modules\Order\Entities\Item;
 use Modules\Order\Entities\Order;
+use \Exception;
 
 class ItemController extends Controller
 {
@@ -20,8 +21,12 @@ class ItemController extends Controller
 
 
     public function store(ItemRequest $request, Order $order){
-        ItemRepository::store($request->all());
-        return back()->with('success', 'Item cadastrado.');
+        try{
+            ItemRepository::store($request->all());
+            return back()->with('success', 'Item cadastrado.');
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }
     }    
 
 
@@ -32,14 +37,22 @@ class ItemController extends Controller
 
 
     public function update(ItemRequest $request, Item $item){
-        ItemRepository::update($item, $request->all());
-        return back()->with('success', 'Item atualizado.');
+        try{
+            ItemRepository::update($item, $request->all());
+            return back()->with('success', 'Item atualizado.');
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }        
     }  
 
 
     public function destroy(Request $request, Item $item){
-        ItemRepository::destroy($item);
-        return back()->with('success', 'Item deletado.');
+        try{
+            ItemRepository::destroy($item);
+            return back()->with('success', 'Item deletado.');
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }
     }
 
 

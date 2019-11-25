@@ -43,6 +43,8 @@ class ViewComposerServiceProvider extends ServiceProvider {
 		View::composer('order::loader.settings.body', SettingComposer::class);
 
 		// widgets
+		View::composer('dashboard::loader.dashboard.dashboard', 'Modules\Order\Http\ViewComposers\Widgets\WidgetComposer');
+
 		View::composer('order::widgets.mini_chart_sale', MiniChartSaleComposer::class);
 		View::composer('order::widgets.mini_chart_order', MiniChartOrderComposer::class);
 		View::composer('order::widgets.mini_chart_average_ticket', MiniChartAverageTicketComposer::class);

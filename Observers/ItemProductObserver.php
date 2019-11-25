@@ -17,6 +17,7 @@ class ItemProductObserver
 		$item_product->description = $product->description;
 		$item_product->price = $product->price;
 		$item_product->category = $product->product_category->description;
+		$item_product->discount_limit = $product->discount_limit;
 	}	
 
 }

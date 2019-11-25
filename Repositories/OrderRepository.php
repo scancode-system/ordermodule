@@ -47,7 +47,9 @@ class OrderRepository
 		OrderClient::create(['order_id' => $order->id, 'client_id' => $data['client_id']]);
 		OrderSaller::create(['order_id' => $order->id, 'saller_id' => $data['saller_id']]);
 		OrderPayment::create(['order_id' => $order->id]);
-		OrderShippingCompany::create(['order_id' => $order->id]);		
+		OrderShippingCompany::create(['order_id' => $order->id]);
+
+		return $order;	
 	}
 
 
@@ -66,6 +68,7 @@ class OrderRepository
 
 	public static function clone(Order $order){
 		$order_cloned = $order->replicate();
+		$order_cloned->status_id = STATUS::OPEN;
 		$order_cloned->save();
 
 

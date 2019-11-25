@@ -4,6 +4,8 @@ namespace Modules\order\Http\ViewComposers\Widgets;
 
 use Modules\Dashboard\Services\ViewComposer\ServiceComposer;
 use Modules\Order\Repositories\OrderRepository;
+use Illuminate\Support\Collection;
+
 
 class MiniInfoProductComposer extends ServiceComposer {
 
@@ -15,26 +17,24 @@ class MiniInfoProductComposer extends ServiceComposer {
     }
 
     private function total($orders_completed){
-        $items_all = $orders_completed->reduce(function ($carry, $order) {
+        $items = $orders_completed->reduce(function ($carry, $order) {
             return $carry->merge($order->items);
         }, collect([]));
 
-        $items_products_grouped = $items_all->groupBy('product_id');
+        $items_grouped = $items->groupBy('product_id');
 
-        $items_product = $items_products_grouped->reduce(function ($carry, $items) {
-            if(is_null($carry)){
-                return $items;
-            }
-            if($carry->sum('qty') > $items->sum('qty')){
+        $product = $items_grouped->reduce(function ($carry, $items) {
+            if($carry->qty > $items->sum('qty')){
                 return $carry;
             } else {
-                return $items;
+                $carry->qty = $items->sum('qty');
+                $carry->description = $items->first()->item_product->description; 
+                return $carry;
             }
-            return $carry->merge($order->items);
-        });        
+        }, (object)['qty' => 0, 'description' => '']);        
 
-        $this->qty = $items_product->sum('qty');
-        $this->description = $items_product->first()->item_product->description;
+        $this->qty = $product->qty;
+        $this->description = $product->description;
     }
 
     public function view($view){

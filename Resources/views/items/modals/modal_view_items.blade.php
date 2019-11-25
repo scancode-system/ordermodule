@@ -23,6 +23,10 @@ Pedido #{{ $item->order->id }}
 	<div class="col">@currency($item->item_product->price)</div>
 </div>
 <div class="row justify-content-center mb-2">
+	<div class="col"><strong>Desconto Máximo: </strong></div>
+	<div class="col text-danger"><strong>@percentage($item->item_product->discount_limit)</strong></div>
+</div>
+<div class="row justify-content-center mb-2">
 	<div class="col"><strong>Total Bruto: </strong></div>
 	<div class="col">@currency($item->total_gross)</div>
 </div>
