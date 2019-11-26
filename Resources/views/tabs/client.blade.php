@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>Transportadora</td>
-					<td>{{ $order->order_client->shipping  ?? 'N/A'}}</td>
+					<td>{{ $order->order_shipping_company->description  ?? 'N/A'}}</td>
 				</tr>
 			</tbody>
 		</table>

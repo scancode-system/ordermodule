@@ -10,9 +10,11 @@
 			{{ Form::select('status_id', $select_statuses, $order->status_id ,['class' => 'form-control', 'id' => 'status_id']) }}
 			{{ Form::close() }}
 		</div>
-			<a href="{{ route('orders.pdf', $order) }}" target="_blank" class="btn btn-outline-danger ml-auto mr-3"><i class="fa fa-file-pdf-o"></i> PDF</a>
+			<span class=" ml-auto"></span>
+			@loader(['loader_path' => 'order.edit_actions'])
+			<a href="{{ route('orders.pdf', $order) }}" target="_blank" class="btn btn-outline-danger mr-3"><i class="fa fa-file-pdf-o"></i> PDF</a>
 			{{ Form::open(['route' => ['orders.clone', $order]]) }}
-			{{ Form::button('<i class="fa fa-share-alt"></i> Clonar Pedido', ['class' => 'btn btn-outline-primary', 'type' => 'submit']) }}
+			{{ Form::button('<i class="fa fa-share-alt"></i> Clonar Pedido', ['class' => 'btn btn-outline-success', 'type' => 'submit']) }}
 			{{ Form::close() }}
 	</div>
 	<div class="card-header">

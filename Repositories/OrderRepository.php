@@ -44,10 +44,10 @@ class OrderRepository
 	public static function store($data){
 		$order = Order::create($data);
 
+		OrderShippingCompany::create(['order_id' => $order->id]);
 		OrderClient::create(['order_id' => $order->id, 'client_id' => $data['client_id']]);
 		OrderSaller::create(['order_id' => $order->id, 'saller_id' => $data['saller_id']]);
 		OrderPayment::create(['order_id' => $order->id]);
-		OrderShippingCompany::create(['order_id' => $order->id]);
 
 		return $order;	
 	}

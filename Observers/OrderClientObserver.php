@@ -39,6 +39,15 @@ class OrderClientObserver
 		$order_client->buyer = $client->buyer;
 		$order_client->email = $client->email;
 		$order_client->phone = $client->phone;
+
+		$shipping_company = $client->shipping_company; 
+		if($client->shipping_company){
+			$order_shipping_company = $order_client->order->order_shipping_company;
+			$order_shipping_company->shipping_company_id = $client->shipping_company->id;
+			$order_shipping_company->description = $client->shipping_company->description;
+			$order_shipping_company->save();
+		}
+
 		return $order_client;
 	}
 

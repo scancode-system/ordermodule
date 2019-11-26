@@ -22,7 +22,7 @@ class ItemController extends Controller
 
     public function store(ItemRequest $request, Order $order){
         try{
-            ItemRepository::store($request->all());
+            $item = ItemRepository::store($request->all());
             return back()->with('success', 'Item cadastrado.');
         } catch (Exception $e){
             return back()->withErrors([$e->getMessage()]);

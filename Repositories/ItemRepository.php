@@ -28,7 +28,7 @@ class ItemRepository
 
 
 	public static function store($data){
-		$item = Item::create($data);
+		return Item::create($data);
 	}
 
 
