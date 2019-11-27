@@ -18,8 +18,7 @@ class CreateSettingOrderTable extends Migration
 
             $table->integer('order_start')->default(1);
             $table->text('statement_responsibility');
-            $table->text('global_observation');
-            $table->integer('number_copies')->default(2);            
+            $table->text('global_observation');            
 
             $table->timestamps();
         });
