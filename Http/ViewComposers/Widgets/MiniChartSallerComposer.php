@@ -38,7 +38,7 @@ class MiniChartSallerComposer extends ServiceComposer {
             $this->sales_names->put($name, $total);
         }
 
-        $this->sales_names = $this->sales_names->sort()->reverse()->slice(0, 5);
+        $this->sales_names = $this->sales_names->sort()->reverse()->slice(0, 10);
     }
 
     private function names(){
