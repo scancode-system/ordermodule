@@ -48,11 +48,6 @@ class OrderController extends Controller
         return back()->with('success', 'Pedido deletado.');
     }
 
-    public function pdf(Request $request, Order $order){
-        $pdf_service = new PDFService($order);
-        return $pdf_service->download();
-    }
-
     public function clone(Request $request, Order $order){
         try{
             $new_order = OrderRepository::clone($order);

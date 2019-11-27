@@ -15,7 +15,7 @@ class InsertSettingOrderTable extends Migration
      */
     public function up()
     {
-        SettingOrder::create(['id' => 1, 'pdf_title' => '', 'statement_responsibility' => '', 'global_observation' => '']);
+        SettingOrder::create(['id' => 1, 'global_observation' => '', 'statement_responsibility' => '']);
     }
 
     /**

@@ -15,7 +15,6 @@
 Route::prefix('orders')->middleware('auth')->group(function() {
 	Route::get('', 'OrderController@index')->name('orders.index');
 	Route::get('{order}/edit/{tab?}', 'OrderController@edit')->name('orders.edit');
-	Route::get('{order}/pdf', 'OrderController@pdf')->name('orders.pdf');
 	// post
 	Route::post('', 'OrderController@store')->name('orders.store');
 	Route::post('{order}/clone', 'OrderController@clone')->name('orders.clone');

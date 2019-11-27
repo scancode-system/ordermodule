@@ -12,7 +12,6 @@
 		</div>
 			<span class=" ml-auto"></span>
 			@loader(['loader_path' => 'order.edit_actions'])
-			<a href="{{ route('orders.pdf', $order) }}" target="_blank" class="btn btn-outline-danger mr-3"><i class="fa fa-file-pdf-o"></i> PDF</a>
 			{{ Form::open(['route' => ['orders.clone', $order]]) }}
 			{{ Form::button('<i class="fa fa-share-alt"></i> Clonar Pedido', ['class' => 'btn btn-outline-success', 'type' => 'submit']) }}
 			{{ Form::close() }}

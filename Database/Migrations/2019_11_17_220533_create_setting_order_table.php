@@ -19,8 +19,6 @@ class CreateSettingOrderTable extends Migration
             $table->integer('order_start')->default(1);
             $table->text('statement_responsibility');
             $table->text('global_observation');
-            $table->string('pdf_title');
-            $table->integer('pdf_margin_top')->default(10);
             $table->integer('number_copies')->default(2);            
 
             $table->timestamps();

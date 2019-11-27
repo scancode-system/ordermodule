@@ -26,7 +26,7 @@
 
 
 <div class="row">
-	<div class="col-6 col-lg-3">
+	<div class="mb-3 mb-xl-0 col-md-6 col-xl-3">
 		<div class="card mb-0">
 			<div class="card-body p-0 d-flex align-items-center">
 				<i class="fa fa-money bg-primary p-4 px-5 font-2xl mr-3"></i>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-6 col-lg-3">
+	<div class="mb-3 mb-xl-0 col-md-6 col-xl-3">
 		<div class="card mb-0">
 			<div class="card-body p-0 d-flex align-items-center">
 				<i class="fa fa-tag bg-info p-4 px-5 font-2xl mr-3"></i>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-6 col-lg-3">
+	<div class="mb-3 mb-md-0 col-md-6 col-xl-3">
 		<div class="card mb-0">
 			<div class="card-body p-0 d-flex align-items-center">
 				<i class="fa fa-line-chart bg-secondary p-4 px-5 font-2xl mr-3"></i>
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-6 col-lg-3">
+	<div class="col-md-6 col-xl-3">
 		<div class="card mb-0">
 			<div class="card-body p-0 d-flex align-items-center">
 				<i class="fa fa-money bg-danger p-4 px-5 font-2xl mr-3"></i>
