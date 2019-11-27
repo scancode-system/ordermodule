@@ -4,7 +4,7 @@
 Pedido #{{ $item->order->id }}
 @endslot
 <div class="d-flex justify-content-center mb-3">
-	<img src="{{ url($item->item_product->image) }}" alt="..." class="img-thumbnail w-50">
+	<img src="{{ url($item->item_product->image) }}" alt="..." class="img-thumbnail w-50" style="width: 223px; height: 180px">
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Referencia: </strong></div>
@@ -42,5 +42,5 @@ Pedido #{{ $item->order->id }}
 	<div class="col"><strong>Total: </strong></div>
 	<div class="col">@currency($item->total)</div>
 </div>
-
+@loader(['loader_path' => 'order.view'])
 @endmodal_view
