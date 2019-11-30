@@ -27,6 +27,7 @@ Route::prefix('orders')->middleware('auth')->group(function() {
 
 
 Route::prefix('items')->middleware('auth')->group(function() {
+	Route::get('{product}/edit/info/ajax', 'ItemController@editInfoAjax');
 	// post
 	Route::post('{order}', 'ItemController@store')->name('items.store')->middleware('order-locked');
 	// put

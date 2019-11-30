@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Order\Http\ViewComposers\EditComposer;
 use Modules\Order\Http\ViewComposers\IndexComposer;
 use Modules\Order\Http\ViewComposers\Items\ItemsComposer;
+use Modules\Order\Http\ViewComposers\Items\InfoComposer;
 use Modules\Order\Http\ViewComposers\Tabs\PaymentComposer;
 use Modules\Order\Http\ViewComposers\Tabs\SallerComposer;
 use Modules\Order\Http\ViewComposers\Tabs\ClientComposer;
@@ -38,6 +39,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
 
 		// item
 		View::composer('order::items.items', ItemsComposer::class);
+		View::composer('order::items.info', InfoComposer::class);
 
 		// setting
 		View::composer('order::loader.settings.body', SettingComposer::class);

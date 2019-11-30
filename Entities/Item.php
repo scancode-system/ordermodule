@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Order\Entities\ItemProduct;
 use Modules\Order\Entities\Order;
 use Modules\Product\Entities\Product;
+use Rocky\Eloquent\HasDynamicRelation;
 
 class Item extends Model
 {
+	use HasDynamicRelation;
+	
 	protected $guarded = [];
 
 	public function order()

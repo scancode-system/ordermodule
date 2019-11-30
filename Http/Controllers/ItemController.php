@@ -9,6 +9,7 @@ use Modules\Order\Http\Requests\ItemRequest;
 use Modules\Order\Repositories\ItemRepository;
 use Modules\Order\Entities\Item;
 use Modules\Order\Entities\Order;
+use Modules\Product\Entities\Product;
 use \Exception;
 
 class ItemController extends Controller
@@ -30,9 +31,9 @@ class ItemController extends Controller
     }    
 
 
-    public function edit(Request $request, $id, $tab = 0)
-    {
-        return view('orders::items.edit');
+
+    public function editInfoAjax(Request $request, Product $product){
+        return view('order::items.info');     
     }
 
 

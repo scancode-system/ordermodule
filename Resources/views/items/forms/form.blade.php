@@ -35,9 +35,12 @@
 			</div>
 		</div>
 	</div>
-	@loader(['loader_path' => 'order.modal_form_items'])
+	<div id="{{ $modal_id }}_info">
+		@if(isset($item))
+		@include('order::items.info', ['product' => $item->product])
+		@endif
+	</div>
 </div>
-@loader(['loader_path' => 'sidebar.itemd'])
 <div class="modal-footer  justify-content-start">
 	{{ Form::button('<i class="fa fa-save"></i><span>Salvar</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 </div>
@@ -61,7 +64,10 @@
 	$('#select_products').select2({
 		theme: 'bootstrap'
 	});
-	//alert('1');
+
+	$('#select_products').change(function(){
+		$("#{{ $modal_id }}_info").load("{{ url('/') }}/items/"+this.value+"/edit/info/ajax");
+	});
 </script>
 @endif
 @endpush()

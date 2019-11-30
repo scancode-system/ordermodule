@@ -11,6 +11,8 @@ class ItemRepository
 {
 
 
+
+	// OLDS
 	public static function list($order = null, $search = '', $limit = 10){
 		$items =  Item::orWhereHas('item_product', function($query) use ($search) {
 			$query->where('description', 'like', '%'.$search.'%')->
