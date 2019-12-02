@@ -44,6 +44,10 @@ class ItemRepository
 		}
 	}
 
+	public static function updateItemDiscount($item, $discount){
+		$item->update(['discount' => $discount]);
+	}
+
 
 	public static function destroy(Item $item){
 		$item->delete();

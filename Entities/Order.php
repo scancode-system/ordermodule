@@ -9,10 +9,11 @@ use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Modules\Order\Entities\Item;
-
+use Rocky\Eloquent\HasDynamicRelation;
 
 class Order extends Model
 {
+	use HasDynamicRelation;
 
 	protected $fillable = ['id', 'status_id', 'full_delivery', 'closing_date', 'observation', 'signature'];
 	protected $dates = [

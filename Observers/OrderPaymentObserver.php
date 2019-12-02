@@ -17,15 +17,24 @@ class OrderPaymentObserver
 			$order_payment->min_value = $payment->min_value;
 			$order_payment->discount = $payment->discount;
 			$order_payment->addition = $payment->addition;
-
-			$items = $order_payment->order->items;
-			$discount = $order_payment->discount;
-			ItemRepository::updateItemsDiscount($items, $discount);
 		} else {
 			$order_payment->description = null;
-			$order_payment->min_value = null;
-			$order_payment->discount = null;
-			$order_payment->addition = null;
+			$order_payment->min_value = 0;
+			$order_payment->discount = 0;
+			$order_payment->addition = 0;
+		}
+
+		$this->giveDiscounts($order_payment);
+	}
+
+	private function giveDiscounts($order_payment){
+		$items = $order_payment->order->items;
+		foreach ($items as $item) {
+			if($item->discount == $order_payment->getOriginal('discount')){
+				ItemRepository::updateItemDiscount($item, $order_payment->discount);
+			} elseif($item->discount < $order_payment->discount){
+				ItemRepository::updateItemDiscount($item, $order_payment->discount);
+			}			
 		}
 	}
 

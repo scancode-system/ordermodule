@@ -25,7 +25,7 @@ class OrderRepository
 		orWhereHas('status', function($query) use ($search) {
 			$query->where('description', 'like', '%'.$search.'%');
 		})->
-		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
+		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment', 'items', 'items.item_product'])->
 		paginate($limit);
 
 		$orders->appends(request()->query());
@@ -35,7 +35,7 @@ class OrderRepository
 	public static function loadClosedOrders(){
 		$orders =  Order::
 		where('status_id', Status::COMPLETED)->
-		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment'])->
+		with(['order_client', 'order_client.order_client_address', 'order_saller', 'order_payment', 'items', 'items.item_product'])->
 		get();
 		return $orders;
 	}

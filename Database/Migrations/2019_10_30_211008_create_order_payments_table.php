@@ -23,9 +23,9 @@ class CreateOrderPaymentsTable extends Migration
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('restrict')->onUpdate('cascade');
 
             $table->string('description')->nullable();
-            $table->decimal('min_value', 10, 2)->nullable();
-            $table->decimal('discount', 5, 2)->nullable();
-            $table->decimal('addition', 5, 2)->nullable();
+            $table->decimal('min_value', 10, 2)->default(0);
+            $table->decimal('discount', 5, 2)->default(0);
+            $table->decimal('addition', 5, 2)->default(0);
 
             $table->timestamps();
         });
