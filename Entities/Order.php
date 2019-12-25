@@ -9,7 +9,7 @@ use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Modules\Order\Entities\Item;
-use Rocky\Eloquent\HasDynamicRelation;
+use Rocky\Eloquent\HasDynamicRelation; 
 
 class Order extends Model
 {
@@ -100,6 +100,16 @@ class Order extends Model
 		$sum = 0;
 		foreach ($this->items as $item) {
 			$sum+= $item->total_addition_value;
+		}
+		return $sum;
+	}
+
+
+	public function getTaxValueAttribute($value)
+	{
+		$sum = 0;
+		foreach ($this->items as $item) {
+			$sum+= $item->total_tax_value;
 		}
 		return $sum;
 	}

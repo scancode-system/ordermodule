@@ -4,11 +4,12 @@ namespace Modules\Order\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Order\Entities\ItemProduct;
+use Modules\Order\Entities\ItemTax;
 use Modules\Order\Entities\Order;
 use Modules\Product\Entities\Product;
 use Rocky\Eloquent\HasDynamicRelation;
 
-class Item extends Model
+class Item extends Model 
 {
 	use HasDynamicRelation;
 	
@@ -29,26 +30,16 @@ class Item extends Model
 		return $this->hasOne(ItemProduct::class);
 	}
 
+	public function item_taxes()
+	{
+		return $this->hasMany(ItemTax::class);
+	}
+
 
 	// accessors
-	public function getTotalAttribute($value)
-	{
-		return $this->total_gross-$this->total_discount_value+$this->total_addition_value;
-	}
-
-	public function getTotalGrossAttribute($value)
-	{
-		return $this->price*$this->qty;
-	}
-
 	public function getDiscountValueAttribute($value)
 	{
 		return ($this->price*$this->discount)/100;
-	}
-
-	public function getTotalDiscountValueAttribute($value)
-	{
-		return $this->discount_value*$this->qty;
 	}
 
 
@@ -57,9 +48,52 @@ class Item extends Model
 		return ($this->price*$this->addition)/100;
 	}
 
+	public function getTaxValueAttribute($value)
+	{
+		$sum = 0;
+		$item_taxes = $this->item_taxes;
+		foreach($item_taxes as $item_tax) {
+			$sum+= $item_tax->value;
+		}
+		return $sum;
+	}
+
+	public function getPriceNetAttribute($value)
+	{
+		return $this->price-$this->discount_value+$this->addition_value+$this->tax_value;
+	}
+
+
+
+
+
+	public function getTotalGrossAttribute($value)
+	{
+		return $this->price*$this->qty;
+	}
+	
+
+	public function getTotalDiscountValueAttribute($value)
+	{
+		return $this->discount_value*$this->qty;
+	}
+
+
+
 	public function getTotalAdditionValueAttribute($value)
 	{
 		return $this->addition_value*$this->qty;
+	}
+
+
+	public function getTotalTaxValueAttribute($value)
+	{
+		return $this->tax_value*$this->qty;
+	}
+
+	public function getTotalAttribute($value)
+	{
+		return $this->price_net*$this->qty;
 	}
 
 

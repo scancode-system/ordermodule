@@ -4,9 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-use Modules\Order\Entities\SettingOrder;
-
-class InsertSettingOrderTable extends Migration
+class CreatePriceModifiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +13,12 @@ class InsertSettingOrderTable extends Migration
      */
     public function up()
     {
-        SettingOrder::create([]);
+        Schema::create('price_modifiers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('module');
+            $table->integer('priority')->default(1);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,6 +28,6 @@ class InsertSettingOrderTable extends Migration
      */
     public function down()
     {
-        SettingOrder::truncate();
+        Schema::dropIfExists('price_modifiers');
     }
 }

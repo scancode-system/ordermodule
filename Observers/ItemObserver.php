@@ -5,16 +5,12 @@ namespace Modules\Order\Observers;
 
 use Modules\Order\Entities\Item;
 use Modules\Order\Entities\ItemProduct;
-
+use Modules\Order\Events\ItemModifierPriceEvent;
+use Modules\Order\Repositories\PriceModifyRepository;
 
 class ItemObserver
 {
 
-	public function creating(Item $item)
-	{
-		$item->price = $item->product->price;
-		$this->checkDiscountLimits($item);
-	}	
 
 	public function created(Item $item)
 	{
@@ -22,13 +18,32 @@ class ItemObserver
 	}	
 
 
-	public function updating(Item $item)
+	public function saving(Item $item)
 	{
-		$this->checkDiscountLimits($item, $item->item_product->discount_limit);
+		$item->price = $item->product->price;
+
+
+
+		// pipeline
+		$price = $item->price;
+		$price_modifiers = PriceModifyRepository::loadByPriority();
+		foreach ($price_modifiers as $price_modify) {
+			$class = ('Modules\\'.$price_modify->module.'\Services\PriceModifyService');
+			$price_modify_service =  new $class();
+			$price = $price_modify_service->price($item, $price);
+			if($price_modify_service->block())
+			{
+				break;
+			}
+		}
+		$item->price = $price;
+
+
+		$this->checkDiscountLimits($item);
 	}
 
-
-	private function checkDiscountLimits(Item $item){
+	private function checkDiscountLimits(Item $item)
+	{
 		$limit_max = $item->product->discount_limit;
 		$limit_min = $item->order->order_payment->discount;
 
