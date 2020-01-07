@@ -7,11 +7,11 @@ Pedido #{{ $order->id }}
 <h5>Informações</h5>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Cliente: </strong></div>
-	<div class="col">{{ $order->order_client->corporate_name }}</div>
+	<div class="col">{{ $order->order_client->corporate_name ?? 'N/A' }}</div>
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Comprador: </strong></div>
-	<div class="col">{{ $order->order_client->buyer }}</div>
+	<div class="col">{{ $order->order_client->buyer ?? 'N/A' }}</div>
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Representante: </strong></div>

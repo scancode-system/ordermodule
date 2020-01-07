@@ -40,25 +40,27 @@ class OrderRepository
 		return $orders;
 	}
 
-
+	// SAVE
 	public static function store($data){
 		$order = Order::create($data);
 
 		OrderShippingCompany::create(['order_id' => $order->id]);
-		OrderClient::create(['order_id' => $order->id, 'client_id' => $data['client_id']]);
+		OrderClient::create(['order_id' => $order->id, 'client_id' => (isset($data['client_id'])?$data['client_id']:null)]);
 		OrderSaller::create(['order_id' => $order->id, 'saller_id' => $data['saller_id']]);
 		OrderPayment::create(['order_id' => $order->id]);
 
 		return $order;	
 	}
 
-
+	// UPDATE
 	public static function update(Order $order, $data){
 		$order->update($data);
 		$order->order_payment->update($data);
-		$order->order_client->update($data);
+		$order->order_client->update($data);		
 		$order->order_saller->update($data);
 		$order->order_shipping_company->update($data);
+
+		return $order;
 	}
 
 

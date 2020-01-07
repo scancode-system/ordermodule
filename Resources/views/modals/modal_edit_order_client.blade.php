@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body text-left">
 				<div class="form-group">
-					{{ Form::select('client_id', $select_clients, $order->order_client->client_id, ['class' => 'form-control select2-single', 'id' => 'select_clients']) }}
+					{{ Form::select('client_id', $select_clients, (($order->order_client)?$order->order_client->client_id:null), ['class' => 'form-control select2-single', 'id' => 'select_clients']) }}
 				</div>
 			</div>
 			<div class="modal-footer  justify-content-start">

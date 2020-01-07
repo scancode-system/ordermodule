@@ -1,7 +1,7 @@
 	<tr>
 		<td class="align-middle">{{ '#'.$order->id }}</td>
-		<td class="align-middle">{{ $order->order_client->corporate_name }}</td>
-		<td class="align-middle">{{ $order->order_client->buyer }}</td>
+		<td class="align-middle">{{ $order->order_client->corporate_name ?? 'N/A' }}</td>
+		<td class="align-middle">{{ $order->order_client->buyer?? 'N/A' }}</td>
 		<td class="align-middle">{{ $order->order_saller->name }}</td>
 		<td class="align-middle text-center"><span class="badge badge-{{ $order->status->color }} badge-pill py-1 px-4">{{ $order->status->description }}</span></td>
 		<td class="align-middle text-center">@currency($order->total)</td>

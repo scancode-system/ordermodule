@@ -1,3 +1,4 @@
+@if($order->order_client)
 <div class="row">
 	<div class="col">
 		<table class="table table-hover table-striped table-borderless">
@@ -44,45 +45,45 @@
 	</div>
 	<div class="col">
 		<table class="table table-hover table-striped table-borderless">
-	<thead class="thead-dark">
-		<tr>
-			<th colspan="2">Endereço</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Rua</td>
-			<td>{{ $order->order_client->order_client_address->street ?? 'N/A'}}</td>
-		</tr>
-		<tr>
-			<td>Número</td>
-			<td>{{ $order->order_client->order_client_address->number ?? 'N/A' }}</td>
-		</tr>
-		<tr>
-			<td>Complemento</td>
-			<td>{{ $order->order_client->order_client_address->apartment  ?? 'N/A'}}</td>
-		</tr>
-		<tr>
-			<td>Bairro</td>
-			<td>{{ $order->order_client->order_client_address->neighborhood  ?? 'N/A'}}</td>
-		</tr>
-		<tr>
-			<td>Cidade</td>
-			<td>{{ $order->order_client->order_client_address->city ?? 'N/A' }}</td>
-		</tr>
-		<tr>
-			<td>Estado</td>
-			<td>{{ $order->order_client->order_client_address->st ?? 'N/A'}}</td>
-		</tr>
-		<tr>
-			<td>CEP</td>
-			<td>{{ $order->order_client->order_client_address->postcode  ?? 'N/A'}}</td>
-		</tr>
-	</tbody>
-</table>
+			<thead class="thead-dark">
+				<tr>
+					<th colspan="2">Endereço</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Rua</td>
+					<td>{{ $order->order_client->order_client_address->street ?? 'N/A'}}</td>
+				</tr>
+				<tr>
+					<td>Número</td>
+					<td>{{ $order->order_client->order_client_address->number ?? 'N/A' }}</td>
+				</tr>
+				<tr>
+					<td>Complemento</td>
+					<td>{{ $order->order_client->order_client_address->apartment  ?? 'N/A'}}</td>
+				</tr>
+				<tr>
+					<td>Bairro</td>
+					<td>{{ $order->order_client->order_client_address->neighborhood  ?? 'N/A'}}</td>
+				</tr>
+				<tr>
+					<td>Cidade</td>
+					<td>{{ $order->order_client->order_client_address->city ?? 'N/A' }}</td>
+				</tr>
+				<tr>
+					<td>Estado</td>
+					<td>{{ $order->order_client->order_client_address->st ?? 'N/A'}}</td>
+				</tr>
+				<tr>
+					<td>CEP</td>
+					<td>{{ $order->order_client->order_client_address->postcode  ?? 'N/A'}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
-
+@endif
 <a href="#" class="btn btn-brand btn-primary" data-toggle="modal" data-target="#modal_edit_order_client"><i class="fa fa-refresh"></i><span>Selecionar um Cliente</span></a>
 @include('order::modals.modal_edit_order_client')
 
