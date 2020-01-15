@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->dateTime('closing_date')->nullable();
 
             $table->text('observation')->nullable();
-            $table->text('signature')->nullable();
+            $table->mediumText('signature')->nullable();
 
             $table->timestamps();
         });

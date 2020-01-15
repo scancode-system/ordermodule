@@ -28,9 +28,9 @@
 			<div class="form-group mb-0">
 				{{ Form::label('discount', 'Desconto') }}
 				@if(isset($item))
-				{{ Form::number('discount', $item->discount, ['class' => 'form-control']) }}
+				{{ Form::number('discount', $item->discount, ['class' => 'form-control', 'step' => '0.01']) }}
 				@else
-				{{ Form::number('discount', old('discount', 0), ['class' => 'form-control']) }}
+				{{ Form::number('discount', old('discount', 0), ['class' => 'form-control', 'step' => '0.01']) }}
 				@endif
 			</div>
 		</div>

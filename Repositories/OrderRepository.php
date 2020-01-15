@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class OrderRepository
 {
 
-
+	// LOAD
 	public static function list($search = '', $limit = 10){
 		$orders =  Order::where('id', $search)->
 		orWhereHas('order_client', function($query) use ($search) {
@@ -40,6 +40,11 @@ class OrderRepository
 		return $orders;
 	}
 
+	public static function loadById($id)
+	{
+		return Order::find($id);
+	}
+
 	// SAVE
 	public static function store($data){
 		$order = Order::create($data);
@@ -63,7 +68,14 @@ class OrderRepository
 		return $order;
 	}
 
+	public static function updateBuyer(Order $order, $data){
+		$order_client = $order->order_client;
+		$order_client->update($data);
+		return $order;
+	}
 
+
+	// Destroy
 	public static function destroy(Order $order){
 		$order->delete();
 	}

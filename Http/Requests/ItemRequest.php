@@ -63,4 +63,15 @@ class ItemRequest extends FormRequest
     {
         return true;
     }
+
+    public function messages()
+    {
+        return [
+            'qty.min' => 'A quantidade precisa ser no mínimo :min',
+            'product_id.unique' => 'Este produto já está no pedido.',
+            'discount.numeric' => 'Disconto precisa ser numérico',
+            'discount.max' => 'Disconto não pode ser maior que :max',
+            'discount.min' => 'Disconto não pode ser menor que :min',
+        ];
+    }
 }

@@ -35,6 +35,7 @@ class OrderServiceProvider extends ServiceProvider
         $this->app->register(ObserverServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(MiddlewareServiceProvider::class);
+        $this->app->register(RelationshipServiceProvider::class);
     }
 
 

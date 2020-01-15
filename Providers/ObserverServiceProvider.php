@@ -19,6 +19,8 @@ use Modules\Order\Observers\OrderPaymentObserver;
 use Modules\Order\Entities\SettingOrder;
 use Modules\Order\Observers\SettingOrderObserver;
 
+use Modules\Order\Entities\OrderShippingCompany;
+use Modules\Order\Observers\OrderShippingCompanyObserver;
 
 class ObserverServiceProvider extends ServiceProvider {
 
@@ -30,6 +32,7 @@ class ObserverServiceProvider extends ServiceProvider {
 		Item::observe(ItemObserver::class);
 		ItemProduct::observe(ItemProductObserver::class);
 		SettingOrder::observe(SettingOrderObserver::class);
+		OrderShippingCompany::observe(OrderShippingCompanyObserver::class);
 	}
 
 	public function register() {

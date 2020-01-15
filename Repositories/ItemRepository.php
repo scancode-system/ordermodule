@@ -3,12 +3,15 @@
 namespace Modules\Order\Repositories;
 
 use Modules\Order\Entities\Item;
+use Modules\Order\Entities\Order;
 use Modules\Order\Entities\Status;
 use Modules\Product\Entities\Product;
 
 
 class ItemRepository
 {
+
+
 
 
 
@@ -33,9 +36,10 @@ class ItemRepository
 		return Item::create($data);
 	}
 
-
+	// UPDATE
 	public static function update(Item $item, $data){
 		$item->update($data);
+		return $item;
 	}
 
 	public static function updateItemsDiscount($items, $discount){
@@ -48,6 +52,12 @@ class ItemRepository
 		$item->update(['discount' => $discount]);
 	}
 
+
+	public static function updateItemsAddition($items, $addition){
+		foreach ($items as $item) {
+			self::update($item, ['addition' => $addition]);
+		}
+	}
 
 	public static function destroy(Item $item){
 		$item->delete();

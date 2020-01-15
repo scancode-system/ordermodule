@@ -10,6 +10,7 @@ class ItemProduct extends Model
 {
 	protected $guarded = [];
 
+		protected $appends = ['image'];
 
 	public function item()
 	{

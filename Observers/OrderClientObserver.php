@@ -11,24 +11,37 @@ class OrderClientObserver
 
 	public function creating(OrderClient $order_client)
 	{
-		$this->refreshClient($order_client);		
+		if($order_client->isDirty('client_id'))
+		{
+			$this->refreshClient($order_client);		
+		}
 	}
 
 	public function created(OrderClient $order_client)
 	{
-		$this->refreshClientAddress($order_client);
+		if($order_client->isDirty('client_id'))
+		{
+			$this->refreshClientAddress($order_client);
+		}
 	}
 
 
 	public function updating(OrderClient $order_client)
 	{
-		$this->refreshClient($order_client);		
+		if($order_client->isDirty('client_id'))
+		{
+			$this->refreshClient($order_client);		
+		}
 	}	
 
 	public function updated(OrderClient $order_client)
 	{
-		$this->refreshClientAddress($order_client);
+		if($order_client->isDirty('client_id'))
+		{
+			$this->refreshClientAddress($order_client);
+		}
 	}
+
 
 	private function refreshClient($order_client){
 		$client = Client::find($order_client->client_id);

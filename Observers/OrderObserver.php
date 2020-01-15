@@ -11,6 +11,7 @@ use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Modules\Order\Exceptions\RedirectBackException;
 use Carbon\Carbon;
+use Exception;
 
 class OrderObserver
 {
@@ -19,9 +20,26 @@ class OrderObserver
 	{
 		if($order->isDirty('status_id')){
 			if($order->status_id == STATUS::COMPLETED){
-				if(is_null($order->order_client->client_id) || is_null($order->order_saller->saller_id) || is_null($order->order_payment->payment_id))	{
-					throw new RedirectBackException('O Pedido não pode ser fechado é necessário que tanto cliente, representante e pagamento seja selecionado.');
-				} else {
+				$message = null;
+				if(is_null($order->order_client->client_id))
+				{
+					$message = 'Cliente não selecinado';
+				} else if(is_null($order->order_client->buyer))
+				{
+					$message = 'Comprador não selecionado';
+				} else if(is_null($order->order_saller->saller_id))
+				{
+					$message = 'Representante não selecinado';
+				} else if( is_null($order->order_payment->payment_id))
+				{
+					$message = 'Pagamento não selecinado';
+				}
+
+				if(!is_null($message))
+				{
+					throw new Exception($message);
+				} else 
+				{
 					$order->closing_date = Carbon::now();
 				}
 			} else {

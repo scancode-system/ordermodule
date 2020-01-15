@@ -9,7 +9,7 @@ use Modules\Client\Entities\Client;
 
 class OrderClient extends Model
 {
-    protected $fillable = ['order_id', 'client_id'];
+    protected $fillable = ['order_id', 'client_id', 'buyer', 'phone', 'email'];
 
     public function order_client_address()
 	{

@@ -24,18 +24,36 @@ class OrderPaymentObserver
 			$order_payment->addition = 0;
 		}
 
+		//$this->giveDiscounts($order_payment);
+	}
+
+	public function updated(OrderPayment $order_payment){
 		$this->giveDiscounts($order_payment);
+		$this->giveAdditions($order_payment);
 	}
 
 	private function giveDiscounts($order_payment){
 		$items = $order_payment->order->items;
 		foreach ($items as $item) {
 			if($item->discount == $order_payment->getOriginal('discount')){
+				//dd('1');
 				ItemRepository::updateItemDiscount($item, $order_payment->discount);
 			} elseif($item->discount < $order_payment->discount){
+				//dd('2');
 				ItemRepository::updateItemDiscount($item, $order_payment->discount);
-			}			
+			} else if($item->discount == $item->product->discount_limit){
+				//dd('3');
+				ItemRepository::updateItemDiscount($item, $order_payment->discount);
+			} else {
+							//dd('nao atualiza');	
+			}	
+
 		}
 	}
 
+	private function giveAdditions($order_payment){
+		$items = $order_payment->order->items;
+		ItemRepository::updateItemsAddition($items, $order_payment->addition);
+	}
 }
+ 

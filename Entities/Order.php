@@ -17,8 +17,11 @@ class Order extends Model
 
 	protected $fillable = ['id', 'status_id', 'full_delivery', 'closing_date', 'observation', 'signature'];
 	protected $dates = [
-        'closing_date'
-    ];
+		'closing_date'
+	];
+
+	protected $hidden = ['signature'];
+	protected $appends = ['signature_check'];
 
 
 	public function status()
@@ -57,6 +60,17 @@ class Order extends Model
 
 
 	// accessors
+	public function getSignatureCheckAttribute($value)
+	{
+		if(is_null($this->signature))
+		{
+			return false;
+		} else 
+		{
+			return true;
+		}
+	}
+
 	public function getTotalItemsAttribute($value)
 	{
 		$sum = 0;

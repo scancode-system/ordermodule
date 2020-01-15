@@ -35,8 +35,15 @@ class OrderController extends Controller
 
 
     public function update(OrderRequest $request, Order $order){
-        OrderRepository::update($order, $request->all());
-        return back()->with('success', 'Pedido atualizado.');
+        try{
+            OrderRepository::update($order, $request->all());
+            return back()->with('success', 'Pedido atualizado.');
+        } catch (Exception $e){
+            return back()->withErrors($e->getMessage());
+        }  
+
+
+
     }  
 
 
