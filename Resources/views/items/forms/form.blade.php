@@ -15,7 +15,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<div class="form-group mb-0">
+			<div class="form-group">
 				{{ Form::label('qty', 'Quantidade') }}
 				@if(isset($item))
 				{{ Form::number('qty', $item->qty, ['class' => 'form-control']) }}
@@ -25,12 +25,24 @@
 			</div>
 		</div>
 		<div class="col">
-			<div class="form-group mb-0">
+			<div class="form-group">
 				{{ Form::label('discount', 'Desconto') }}
 				@if(isset($item))
 				{{ Form::number('discount', $item->discount, ['class' => 'form-control', 'step' => '0.01']) }}
 				@else
 				{{ Form::number('discount', old('discount', 0), ['class' => 'form-control', 'step' => '0.01']) }}
+				@endif
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="form-group mb-0">
+				{{ Form::label('observation', 'Observação do Item') }}
+				@if(isset($item))
+				{{ Form::text('observation', $item->observation, ['class' => 'form-control', 'placeholder' => 'Observação do Item']) }}
+				@else
+				{{ Form::text('observation', old('observation'), ['class' => 'form-control', 'placeholder' => 'Observação do Item']) }}
 				@endif
 			</div>
 		</div>

@@ -28,6 +28,8 @@ class CreateItemsTable extends Migration
             $table->integer('qty')->default(1);
             $table->decimal('discount', 5, 2)->default(0);
             $table->decimal('addition', 5, 2)->default(0);
+
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }
