@@ -45,7 +45,16 @@ class Item extends Model
 
 	public function getAdditionValueAttribute($value)
 	{
-		return ($this->price*$this->addition)/100;
+		return (($this->price-$this->discount_value)*$this->addition)/100;
+	}
+
+	public function getTaxesAttribute($value)
+	{
+		$item_taxes = $this->item_taxes;
+		foreach($item_taxes as $item_tax) {
+			$item_tax->value = $item_tax->value;
+		}
+		return $item_taxes;
 	}
 
 	public function getTaxValueAttribute($value)
@@ -62,9 +71,6 @@ class Item extends Model
 	{
 		return $this->price-$this->discount_value+$this->addition_value+$this->tax_value;
 	}
-
-
-
 
 
 	public function getTotalGrossAttribute($value)
