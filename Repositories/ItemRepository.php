@@ -11,12 +11,9 @@ use Modules\Product\Entities\Product;
 class ItemRepository
 {
 
-
-
-
-
 	// OLDS
 	public static function list($order = null, $search = '', $limit = 10){
+		
 		$items =  Item::orWhereHas('item_product', function($query) use ($search) {
 			$query->where('description', 'like', '%'.$search.'%')->
 			orWhere('sku', 'like', '%'.$search.'%');
@@ -26,7 +23,6 @@ class ItemRepository
 			$items->where('order_id', $order->id);
 		}
 		$items = $items->paginate($limit);
-
 		$items->appends(request()->query());
 		return $items;
 	}
@@ -63,6 +59,12 @@ class ItemRepository
 		$item->delete();
 	}
 
+
+	// LOADS
+	public static function loadById($id)
+	{	
+		return Item::find($id);
+	}
 
 	public static function loadItemsClosedOrders(){
 		$items = Item::

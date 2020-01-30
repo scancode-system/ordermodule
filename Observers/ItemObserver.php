@@ -44,7 +44,7 @@ class ItemObserver
 
 	private function checkDiscountLimits(Item $item)
 	{
-		$limit_max = $item->product->discount_limit;
+		$limit_max = $item->item_product->discount_limit;
 		$limit_min = $item->order->order_payment->discount;
 
 		if($limit_min > $limit_max)
@@ -58,7 +58,5 @@ class ItemObserver
 		if($limit_min > $item->discount){
 			$item->discount = $limit_min;	
 		}
-
-
 	}
 }
