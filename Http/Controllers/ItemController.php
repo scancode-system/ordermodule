@@ -27,6 +27,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request, Order $order){
         //try{
             $item = ItemRepository::store($request->all());
+            //dd($item);
             event(new ItemControllerAfterStoreEvent($item, $request->all()));
             return back()->with('success', 'Item cadastrado.');
         //} catch (Exception $e){

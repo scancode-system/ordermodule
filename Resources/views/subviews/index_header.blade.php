@@ -1,7 +1,7 @@
 <div class="card-header">
 	<div class="row">
 		<div class="col">
-			{{  Form::open(['route' => 'orders.index']) }}
+			{{  Form::open(['route' => 'orders.index', 'method' => 'GET']) }}
 			<div class="input-group">
 				<span class="input-group-prepend">
 					{{ Form::button('<i class="fa fa-search"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) }}

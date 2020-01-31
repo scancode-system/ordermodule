@@ -45,7 +45,7 @@ class Item extends Model
 
 	public function getAdditionValueAttribute($value)
 	{
-		return (($this->price-$this->discount_value)*$this->addition)/100;
+		return (($this->price)*$this->addition)/100;
 	}
 
 	public function getTaxesAttribute($value)

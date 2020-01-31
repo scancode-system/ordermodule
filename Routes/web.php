@@ -11,7 +11,7 @@
 |
 */
 
-
+ 
 Route::prefix('orders')->middleware('auth')->group(function() {
 	Route::get('', 'OrderController@index')->name('orders.index');
 	Route::get('{order}/edit/{tab?}', 'OrderController@edit')->name('orders.edit');

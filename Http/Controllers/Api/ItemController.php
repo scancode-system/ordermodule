@@ -19,7 +19,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request, Order $order)
     {
         $item = ItemRepository::store($request->all());
-        event(new ItemControllerAfterStoreEvent($request->all()));
+        event(new ItemControllerAfterStoreEvent($item, $request->all()));
 
         $order = Order::with(['order_payment', 'order_shipping_company', 'order_client', 'items', 'items.item_product', 'status'])->find($item->order_id);
         $order->total = $order->total;
@@ -35,7 +35,7 @@ class ItemController extends Controller
 
     public function update(ItemRequest $request, Item $item)
     {
-        event(new ItemControllerBeforeUpdateEvent($request->all()));
+        event(new ItemControllerBeforeUpdateEvent($item, $request->all()));
         ItemRepository::update($item, $request->all());
         
         $order = Order::with(['order_payment', 'order_shipping_company', 'order_client', 'items', 'items.item_product', 'status'])->find($item->order_id); 

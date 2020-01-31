@@ -1,9 +1,8 @@
 @extends('dashboard::layouts.master')
 
 @section('content')
-
 <div class="card">
-	@include('order::subviews.index_header',['search' => 'Pesquisar', 'route_search' => 'orders.index', 'route_add' => 'orders.create'])
+	@include('order::subviews.index_header')
 	<div class="card-body">
 		@alert_errors()
 		<table class="table table-responsive-sm bg-white table-hover border">

@@ -30,10 +30,14 @@ class OrderObserver
 				} else if(is_null($order->order_saller->saller_id))
 				{
 					$message = 'Representante não selecinado';
-				} else if( is_null($order->order_payment->payment_id))
+				} else if(is_null($order->order_payment->payment_id))
 				{
 					$message = 'Pagamento não selecinado';
+				} else if($order->order_payment->min_value > $order->total)
+				{
+					$message = 'O Valor da compra não atingiu o valor mínimo para esta forma de pagamento';
 				}
+
 
 				if(!is_null($message))
 				{
