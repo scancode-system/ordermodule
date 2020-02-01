@@ -28,7 +28,9 @@ class ItemController extends Controller
             $item->price_net = $item->price_net;
             $item->tax_value = $item->tax_value;
             $item->discount_value = $item->discount_value;
+            $item->discount = $item->discount;
             $item->addition_value = $item->addition_value;
+            $item->addition = $item->addition;
         }
         return $order;
     }

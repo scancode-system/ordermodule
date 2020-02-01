@@ -20,7 +20,7 @@ class ProductsExport implements FromCollection, WithStrictNullComparison
     }
 
     private function header(){
-    	return [['referencia', 'descricao', 'categoria', 'preco', 'quantidade', 'total_bruto', 'desconto_valor', 'acrescimo_valor', 'total']];
+    	return [['Referência', 'Descrição', 'Categoria', 'Preço', 'Unidades Vendidas', 'Total Bruto', 'Total de Descontos', 'Total de Acréscimos', 'Total Final']];
     }
 
 

@@ -7,6 +7,7 @@ use Modules\Order\Entities\Item;
 use Modules\Order\Entities\ItemProduct;
 use Modules\Order\Events\ItemModifierPriceEvent;
 use Modules\Order\Repositories\PriceModifyRepository;
+use Modules\Order\Events\ItemAfterDiscountParseEvent;
 
 class ItemObserver
 {
@@ -59,6 +60,8 @@ class ItemObserver
 		if($limit_min > $item->discount){
 			$item->discount = $limit_min;	
 		}
+
+		event(new ItemAfterDiscountParseEvent($item));
 	}
 
 	private function getLimitMax($item)

@@ -25,14 +25,14 @@ class ItemController extends Controller
 
 
     public function store(ItemRequest $request, Order $order){
-        //try{
+        try{
             $item = ItemRepository::store($request->all());
             //dd($item);
             event(new ItemControllerAfterStoreEvent($item, $request->all()));
             return back()->with('success', 'Item cadastrado.');
-        //} catch (Exception $e){
-        //    return back()->withErrors([$e->getMessage()]);
-       // }
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }
     }    
 
 
@@ -43,13 +43,13 @@ class ItemController extends Controller
 
 
     public function update(ItemRequest $request, Item $item){
-        //try{
+        try{
             event(new ItemControllerBeforeUpdateEvent($item, $request->all()));
             ItemRepository::update($item, $request->all());
             return back()->with('success', 'Item atualizado.');
-        //} catch (Exception $e){
-        //    return back()->withErrors([$e->getMessage()]);
-        //}        
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }        
     }  
 
 
