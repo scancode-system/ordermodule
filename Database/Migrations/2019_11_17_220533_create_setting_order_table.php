@@ -16,7 +16,8 @@ class CreateSettingOrderTable extends Migration
         Schema::create('setting_order', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('order_start')->default(1);            
+            $table->integer('order_start')->default(1);
+            $table->boolean('buyer')->default(1);            
 
             $table->timestamps();
         });

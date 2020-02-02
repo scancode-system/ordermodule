@@ -10,6 +10,7 @@ use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Modules\Order\Exceptions\RedirectBackException;
+use Modules\Order\Repositories\SettingOrderRepository;
 use Carbon\Carbon;
 use Exception;
 
@@ -20,11 +21,12 @@ class OrderObserver
 	{
 		if($order->isDirty('status_id')){
 			if($order->status_id == STATUS::COMPLETED){
+				SettingOrderRepository::load();
 				$message = null;
 				if(is_null($order->order_client->client_id))
 				{
 					$message = 'Cliente não selecinado';
-				} else if(is_null($order->order_client->buyer))
+				} else if(is_null($order->order_client->buyer) && (SettingOrderRepository::load())->buyer)
 				{
 					$message = 'Comprador não selecionado';
 				} else if(is_null($order->order_saller->saller_id))

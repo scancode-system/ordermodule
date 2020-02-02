@@ -13,6 +13,8 @@
 		<div class="col text-right">
 			<a href="#" class="btn btn-brand btn-primary" data-toggle="modal" data-target="#modal_create_order"><i class="fa fa-plus-square-o"></i><span>Novo Pedido</span></a>
 			@include('order::modals.modal_create_order')
+			<a href="#" class="btn btn-brand btn-danger ml-2" data-toggle="modal" data-target="#modal_clean_orders"><i class="fa fa-trash"></i><span>Limpar Pedidos</span></a>
+			@include('order::modals.modal_clean_orders')
 		</div>
 	</div>
 </div>

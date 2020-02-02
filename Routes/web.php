@@ -23,6 +23,7 @@ Route::prefix('orders')->middleware('auth')->group(function() {
 	Route::put('{order}/status', 'OrderController@update')->name('orders.update.status');	
 	// delete
 	Route::delete('{order}/destroy', 'OrderController@destroy')->name('orders.destroy');
+	Route::delete('empty/destroy/clean', 'OrderController@destroyClean')->name('orders.destroy.clean');
 });
 
 

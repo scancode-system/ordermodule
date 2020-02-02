@@ -5,6 +5,7 @@
 	@include('order::subviews.index_header')
 	<div class="card-body">
 		@alert_errors()
+		@alert_success()
 		<table class="table table-responsive-sm bg-white table-hover border">
 			@include('order::tables.index.header')
 			<tbody>

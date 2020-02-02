@@ -55,6 +55,16 @@ class OrderController extends Controller
         return back()->with('success', 'Pedido deletado.');
     }
 
+    public function destroyClean(Request $request)
+    {
+        try{
+            $deleted_count = OrderRepository::clean();
+            return back()->with('success', $deleted_count. ' pedidos deletado(s).');
+        } catch (Exception $e){
+            return back()->withErrors([$e->getMessage()]);
+        }
+    }
+
     public function clone(Request $request, Order $order){
         try{
             $new_order = OrderRepository::clone($order);

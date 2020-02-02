@@ -75,11 +75,29 @@ class OrderRepository
 	}
 
 
-	// Destroy
+	// DESTROY
 	public static function destroy(Order $order){
 		$order->delete();
 	}
 
+
+	public static function clean()
+	{
+		$orders = Order::all();
+		$deleted_count = 0;
+		foreach ($orders as $order) 
+		{
+			if($order->items()->count() == 0)
+			{
+				$order->delete();
+				$deleted_count++;
+			}
+		}
+		return $deleted_count;
+	}
+
+
+	//////////////////////////
 	public static function clone(Order $order){
 		$order_cloned = $order->replicate();
 		$order_cloned->status_id = STATUS::OPEN;
