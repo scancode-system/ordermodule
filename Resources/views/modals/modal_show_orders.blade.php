@@ -15,7 +15,7 @@ Pedido #{{ $order->id }}
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Representante: </strong></div>
-	<div class="col">{{ $order->order_saller->name }}</div>
+	<div class="col">{{ $order->order_saller->name ?? 'N/A' }}</div>
 </div>
 <div class="row justify-content-center mb-2">
 	<div class="col"><strong>Status: </strong></div>
