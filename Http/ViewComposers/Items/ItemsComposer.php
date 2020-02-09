@@ -38,7 +38,13 @@ class ItemsComposer extends ServiceComposer {
 
 
     private function select_products(){
-        $this->select_products = ProductRepository::toSelect('id', 'description');
+        $products = ProductRepository::loadAll();
+        $select_products = [];
+        foreach ($products as $product) 
+        {
+            $select_products[$product->id] = $product->sku.'/'.$product->description;
+        }
+        $this->select_products = $select_products;
     }
 
 
