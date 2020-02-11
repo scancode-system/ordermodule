@@ -143,5 +143,14 @@ class Order extends Model
 		}
 	}
 
+	public function getDeliveryNameAliasAttribute($value)
+	{
+		if($this->full_delivery == 1){
+			return 'I';
+		} else {
+			return 'P';
+		}
+	}
+
 
 }
