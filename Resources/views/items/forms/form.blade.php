@@ -8,9 +8,12 @@
 <div class="modal-body">
 	<div class="form-group">
 		@if(isset($item))
-		{{ Form::select('product_id', $select_products, $item->product_id, ['class' => 'form-control', 'placeholder' => 'Selecione um Produto', 'disabled' => 'disabled']) }}
+		{{ Form::text('product_id', $item->item_product->description, ['class' => 'form-control', 'disabled' => 'disabled']) }}
+
 		@else
-		{{ Form::select('product_id', $select_products, old('product_id'), ['class' => 'form-control', 'id' => 'select_products', 'placeholder' => 'Selecione um Produto']) }}
+
+		{{ Form::select('product_id', [], null, ['class' => 'form-control select2-single', 'id' => 'select_products', 'placeholder' => 'Selecione um Produto', 'style' => 'width:100%']) }}
+
 		@endif
 	</div>
 	<div class="row">
@@ -73,9 +76,26 @@
 @if(!isset($item))
 {{ Html::script('modules/dashboard/coreui/node_modules/select2/dist/js/select2.min.js') }}
 <script>
+	
+
 	$('#select_products').select2({
+		ajax: {
+			url: function (params) {
+				return '{{ url("/") }}/products/select/' + params.term;
+			},
+			dataType: 'json',
+			delay: 250,
+			cache: true,
+			processResults: function (data) {
+				return {
+					results: data
+				};
+			}
+		},
+		minimumInputLength: 1,
 		theme: 'bootstrap'
 	});
+
 
 	$('#select_products').change(function(){
 		$("#{{ $modal_id }}_info").load("{{ url('/') }}/items/"+this.value+"/edit/info/ajax");

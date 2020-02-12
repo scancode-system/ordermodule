@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body text-left">
 				<div class="form-group">
-					{{ Form::select('client_id', $select_clients, (($order->order_client)?$order->order_client->client_id:null), ['class' => 'form-control select2-single', 'id' => 'select_clients']) }}
+					{{ Form::select('client_id', [], null, ['class' => 'form-control select2-single', 'id' => 'select_clients', 'style' => 'width:100%', 'placeholder' => 'Selecione um Cliente']) }}
 				</div>
 			</div>
 			<div class="modal-footer  justify-content-start">
@@ -29,9 +29,26 @@
 @push('scripts')
 {{ Html::script('modules/dashboard/coreui/node_modules/select2/dist/js/select2.min.js') }}
 <script>
+
 	$('#select_clients').select2({
+		ajax: {
+			url: function (params) {
+				return '{{ url("/") }}/clients/select/' + params.term;
+			},
+			dataType: 'json',
+			delay: 250,
+			cache: true,
+			processResults: function (data) {
+				return {
+					results: data
+				};
+			}
+		},
+		minimumInputLength: 1,
 		theme: 'bootstrap'
 	});
+
+
 </script>
 @endpush()
 
