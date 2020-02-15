@@ -13,11 +13,11 @@
 					<td>{{ $order->order_client->client_id }}</td>
 				</tr>
 				<tr>
-					<td>Nome Fantasia</td>
+					<td>Razão Social</td>
 					<td>{{ $order->order_client->corporate_name ?? 'N/A' }}</td>
 				</tr>
 				<tr>
-					<td>Razão Social</td>
+					<td>Nome Fantasia</td>
 					<td>{{ $order->order_client->fantasy_name  ?? 'N/A'}}</td>
 				</tr>
 				<tr>
