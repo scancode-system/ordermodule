@@ -51,6 +51,8 @@ Route::prefix('reports')->middleware('auth')->group(function() {
 
 	Route::get('products', 'ReportController@products')->name('reports.products');
 	Route::get('products/full', 'ReportController@productsFull')->name('reports.products.full');
+
+	Route::get('sallers', 'ReportController@sallers')->name('reports.sallers');
 });
 
 Route::prefix('export')->group(function() {

@@ -12,6 +12,7 @@ use Modules\Order\Exports\OrdersFullExport;
 use Modules\Order\Exports\ItemsExport;
 use Modules\Order\Exports\ItemsFullExport;
 use Modules\Order\Exports\ProductsExport;
+use Modules\Order\Exports\SallersExport;
 use Modules\Order\Exports\ProductsFullExport;
 
 
@@ -40,6 +41,10 @@ class ReportController extends Controller
 
 	public function productsFull(){
 		return Excel::download(new ProductsFullExport, 'Produtos Detalhado.xlsx');
+	}
+
+	public function sallers(){
+		return Excel::download(new SallersExport, 'Representantes.xlsx');
 	}
 
 }
