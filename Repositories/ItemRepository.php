@@ -6,6 +6,7 @@ use Modules\Order\Entities\Item;
 use Modules\Order\Entities\Order;
 use Modules\Order\Entities\Status;
 use Modules\Product\Entities\Product;
+use Carbon\Carbon;
 
 
 class ItemRepository
@@ -85,6 +86,14 @@ class ItemRepository
 		where('product_id', $product->id)->get();
 	}
 
+	public static function loadSoldItemsByProductDate(Product $product, $date){
+		return Item::whereHas('order', function ($query) use($date) {
+			$query->where('status_id', Status::COMPLETED)->
+			whereDate('closing_date', $date);
+
+		})->
+		where('product_id', $product->id)->get();
+	}
 
 /*
 	public static function loadProductsSold(){
