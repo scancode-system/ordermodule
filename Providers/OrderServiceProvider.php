@@ -18,7 +18,7 @@ class OrderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-                $this->registerConfig();
+        $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
@@ -36,7 +36,7 @@ class OrderServiceProvider extends ServiceProvider
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(MiddlewareServiceProvider::class);
         $this->app->register(RelationshipServiceProvider::class);
-    }
+    } 
 
 
 
