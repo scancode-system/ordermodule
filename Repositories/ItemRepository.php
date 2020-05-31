@@ -56,12 +56,20 @@ class ItemRepository
 		}
 	}
 
+	// Destroy
 	public static function destroy(Item $item){
 		$item->delete();
 	}
 
+	public static function destroy_family($order_id, $sku){
+		$items = self::familyByOrderSku($order_id, $sku);
+		foreach ($items as $item) {
+			self::destroy($item);
+		}
+	}
 
-	// LOADS
+
+	// LOAD
 	public static function loadById($id)
 	{	
 		return Item::find($id);
@@ -95,34 +103,18 @@ class ItemRepository
 		where('product_id', $product->id)->get();
 	}
 
-/*
-	public static function loadProductsSold(){
-		$items = Item::whereHas('order', function ($query) {
-    		//$query->where('status_id', Status::CONCLUIDO);
-		})->groupBy(['product_id'])->get(['product_id']);
-		$ids = [];
-		foreach ($items as $item) {
-			array_push($ids, $item->product_id);
-		}
-
-		return $ids;
+	public static function family(Item $item){
+		$items = Item::where('order_id', $item->order_id)->whereHas('item_product', function($query) use ($item) {
+			$query->where('sku', $item->product->sku);
+		})->get();
+		return $items;
 	}
 
-	public static function getProductsIdSold(){
-		$items = Item::whereHas('order', function ($query) {
-    		//$query->where('status_id', Status::CONCLUIDO);
-		})->groupBy(['product_id'])->get(['product_id']);
-		$ids = [];
-		foreach ($items as $item) {
-			array_push($ids, $item->product_id);
-		}
-
-		return $ids;
+	public static function familyByOrderSku($order_id, $sku){
+		$items = Item::where('order_id', $order_id)->whereHas('item_product', function($query) use ($sku) {
+			$query->where('sku', $sku);
+		})->get();
+		return $items;
 	}
-
-	public static function loadByProductId($id){
-		return Item::where('product_id', $id)->first();
-	}
-*/
 
 }

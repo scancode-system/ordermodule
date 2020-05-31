@@ -3,6 +3,7 @@
 namespace Modules\Order\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Order\Entities\Item;
 use Modules\Order\Entities\ItemProduct;
 use Modules\Order\Entities\ItemTax;
 use Modules\Order\Entities\Order;

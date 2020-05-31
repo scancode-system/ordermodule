@@ -99,15 +99,15 @@ class OrderRepository
 
 	//////////////////////////
 	public static function clone(Order $order){
+
 		$order_cloned = $order->replicate();
 		$order_cloned->status_id = STATUS::OPEN;
 		$order_cloned->save();
 
-
+		OrderShippingCompany::create(['order_id' => $order_cloned->id, 'shipping_company_id' => $order->order_shipping_company->shipping_company_id]);
 		OrderClient::create(['order_id' => $order_cloned->id, 'client_id' => $order->order_client->client_id]);
 		OrderSaller::create(['order_id' => $order_cloned->id, 'saller_id' => $order->order_saller->saller_id]);
-		OrderPayment::create(['order_id' => $order_cloned->id, 'payment_id' => $order->order_payment->payment_id]);
-		OrderShippingCompany::create(['order_id' => $order_cloned->id, 'shipping_company_id' => $order->order_shipping_company->shipping_company_id]);
+		OrderPayment::create(['order_id' => $order_cloned->id, 'payment_id' => $order->order_payment->payment_id]);		
 
 		foreach ($order->items as $item) {
 			$item_cloned = $item->replicate();

@@ -41,9 +41,6 @@ class OrderController extends Controller
         } catch (Exception $e){
             return back()->withErrors($e->getMessage());
         }  
-
-
-
     }  
 
 
@@ -70,7 +67,7 @@ class OrderController extends Controller
             $new_order = OrderRepository::clone($order);
             return redirect()->route('orders.edit', $new_order)->with('success', 'Pedido '.$new_order->id.' criado como clone do pedido '.$order->id.'.');
         } catch (Exception $e){
-            return back()->withErrors(['O Pedido não pode ser totalmente clonado, pois não há estoque suficiente de produtos.']);
+            return back()->withErrors([$e->getMessage()]);
         }     
     }
 

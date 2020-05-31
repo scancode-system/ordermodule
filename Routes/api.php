@@ -18,6 +18,7 @@ Route::prefix('items')->middleware('auth.basic.once')->group(function() {
 
 	Route::post('{order}', 'Api\ItemController@store')->middleware('order-locked-app');
 	Route::put('{item}', 'Api\ItemController@update')->middleware('order-locked-app');
+	Route::put('{order}/many', 'Api\ItemController@updateMany')->middleware('order-locked-app');
 	Route::delete('{item}', 'Api\ItemController@destroy')->middleware('order-locked-app');
 
 });

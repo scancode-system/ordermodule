@@ -54,18 +54,4 @@ class OrderObserver
 		}
 	}
 
-
-	public function updated(Order $order){
-		/*if($order->isDirty('payment_id')){
-			$payment = Payment::find($order_payment->order->payment_id);
-			$order_payment->description = $payment->description;
-			$order_payment->min_value = $payment->min_value;
-			$order_payment->discount = $payment->discount;
-			$order_payment->addition = $payment->addition;
-			$order->order_payment->update(['order_id' => $order->id]);
-		}*/
-	}		
-
-
-
 }
