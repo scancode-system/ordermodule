@@ -1,4 +1,4 @@
-@modal_view(['modal_id' => 'orders_show_'.$order->id, 'edit_route' => 'orders.edit', 'model_id' => $order->id])
+<x-modal_view :modal-id="'orders_show_'.$order->id" edit-route="orders.edit" :model_id="$order->id">
 
 @slot('title')
 Pedido #{{ $order->id }}
@@ -60,4 +60,4 @@ Pedido #{{ $order->id }}
 	<div class="col">@currency($order->total)</div>
 </div>
 
-@endmodal_view
+</x-modal_view>
