@@ -21,6 +21,11 @@ class OrderObserver
 	{
 		if($order->isDirty('status_id')){
 			if($order->status_id == STATUS::COMPLETED){
+				if(!$order->first_closure){
+					$order->first_closure = true;
+				}
+
+
 				SettingOrderRepository::load();
 				$message = null;
 				if(is_null($order->order_client->client_id))

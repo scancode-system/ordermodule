@@ -70,12 +70,28 @@ class ItemRepository
 
 
 	// LOAD
+	public static function load()
+	{	
+		return Item::all();
+	}
+
+	public static function loadByClosedOrders(){
+		$items = Item::
+		whereHas('order', function ($query) {
+			$query->where('status_id', Status::COMPLETED);
+		})->
+		orderBy('order_id')->
+		get();
+
+		return $items;
+	}
+
 	public static function loadById($id)
 	{	
 		return Item::find($id);
 	}
 
-	public static function loadItemsClosedOrders(){
+	public static function loadItemsClosedOrders(){ /* deprecated */
 		$items = Item::
 		whereHas('order', function ($query) {
 			$query->where('status_id', Status::COMPLETED);

@@ -25,6 +25,8 @@ class CreateOrdersTable extends Migration
             $table->text('observation')->nullable();
             $table->mediumText('signature')->nullable();
 
+            $table->boolean('first_closure')->default(false);
+
             $table->timestamps();
         });
     }

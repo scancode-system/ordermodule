@@ -17,32 +17,41 @@ class TableProductsBestSoldComposer extends ServiceComposer {
 
     private function products(){
         $this->products = new Collection();
-        $products = ProductRepository::loadAll();
-        foreach ($products as $product) {
-            $data = (object) [
-                'image' => $product->image,
-                'description' => $product->description,
-                'price' => $product->price,
+
+        // begin
+        $items = ItemRepository::loadByClosedOrders();
+        $items->load('product');
+
+        $items_grouped = $items->groupBy(function ($item) {
+            return $item->product_id;
+        });
+
+        foreach ($items_grouped as $items) {
+            $product = $this->productStructure($items->first());
+
+            foreach ($items as $item) {
+                $product->qty += $item->qty;
+                $product->discount_value += $item->discount_value;
+                $product->addition_value += $item->addition_value;
+                $product->total += $item->total;
+            }
+
+            $this->products->push($product);
+        }
+
+    }
+
+    private function productStructure($item)
+    {
+        return (object) [
+                'image' => $item->product->image,
+                'description' => $item->product->description,
+                'price' => $item->product->price,
                 'discount_value' => 0,
                 'addition_value' => 0,
                 'qty' => 0,
                 'total' => 0,
             ];
-
-            $items = ItemRepository::loadSoldItemsByProduct($product);
-
-            foreach ($items as $item) {
-                $data->qty += $item->qty;
-                $data->discount_value += $item->discount_value;
-                $data->addition_value += $item->addition_value;
-                $data->total += $item->total;
-            }
-
-            $this->products->push($data);
-        }
-
-        $this->products = $this->products->sortByDesc('total')->slice(0,5);
-
     }
 
     public function view($view){
