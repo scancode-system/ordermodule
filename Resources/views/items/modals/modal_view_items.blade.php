@@ -1,4 +1,4 @@
-@modal_view(['modal_id' => 'modal_view_items_'.$item->id])
+<x-modal_view :modal-id="'modal_view_items_'.$item->id">
 
 @slot('title')
 Pedido #{{ $item->order->id }}
@@ -69,4 +69,4 @@ Pedido #{{ $item->order->id }}
 -->
 
 @loader(['loader_path' => 'order.view'])
-@endmodal_view
+</x-modal_view>
