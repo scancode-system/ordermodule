@@ -17,7 +17,7 @@ class CreateSettingOrderTable extends Migration
             $table->bigIncrements('id');
 
             $table->integer('order_start')->default(1);
-            $table->boolean('buyer')->default(1);            
+            $table->boolean('buyer')->default(0);            
 
             $table->timestamps();
         });
