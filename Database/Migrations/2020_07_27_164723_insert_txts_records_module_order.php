@@ -25,6 +25,6 @@ class InsertTxtsRecordsModuleOrder extends Migration
      */
     public function down()
     {
-        TxtRepository::deleteByAlias('Clientes');
+        TxtRepository::deleteByAlias('Clientes - Padrão');
     }
 }

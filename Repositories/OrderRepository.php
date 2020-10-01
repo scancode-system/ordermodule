@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Modules\Order\Entities\Order;
 use Modules\Order\Entities\OrderClient;
 use Modules\Order\Entities\OrderSaller;
@@ -9,6 +10,7 @@ use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Carbon\Carbon;
+
 
 class OrderRepository
 {
@@ -43,6 +45,16 @@ class OrderRepository
 	public static function loadById($id)
 	{
 		return Order::find($id);
+	}
+
+	public static function loadClosingDatesBetweenClosingDates($start, $end){
+		return  Order::
+		where('status_id', Status::COMPLETED)->
+		whereBetween('closing_date', [$start, $end])->
+		orderBy('closing_date')->
+		get()->groupBy(function($order){
+			return $order->closing_date->format('Y-m-d');
+		})->keys();
 	}
 
 	// SAVE

@@ -25,7 +25,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request, Order $order)
     {
         $item = ItemRepository::store($request->all());
-        event(new ItemControllerAfterStoreEvent($item, $request->all()));
+        event(new ItemControllerAfterStoreEvent($item, $request->all())); // faz nada a principio
 
         $order = Order::with(['order_payment', 'order_shipping_company', 'order_client', 'items', 'items.item_product', 'status'])->find($item->order_id);
         $order->total = $order->total;
@@ -38,12 +38,15 @@ class ItemController extends Controller
             $item->addition_value = $item->addition_value;
             $item->addition = $item->addition;
         }
-        return $order;
+
+
+        $messages = collect(session()->pull('messages_warning'))->values();
+        return ['order' => $order, 'messages' => $messages];
     }
 
     public function update(ItemRequest $request, Item $item)
     {
-        event(new ItemControllerBeforeUpdateEvent($item, $request->all()));
+        event(new ItemControllerBeforeUpdateEvent($item, $request->all())); // faz nada a principio
         ItemRepository::update($item, $request->all());
         
         $order = Order::with(['order_payment', 'order_shipping_company', 'order_client', 'items', 'items.item_product', 'status'])->find($item->order_id); 
@@ -55,7 +58,9 @@ class ItemController extends Controller
             $item->discount_value = $item->discount_value;
             $item->addition_value = $item->addition_value;
         }
-        return $order;
+
+        $messages = session()->pull('messages_warning');
+        return ['order' => $order, 'messages' => $messages];
     }
 
     public function updateMany(Request $request, Order $order) // Depois tem que criar uma validação aqui neh, provavelmente nao vai ser requestFORM mas algo MANUAL IMPORTANTE
@@ -119,9 +124,9 @@ class ItemController extends Controller
         ], [
             'qty.min' => 'A quantidade precisa ser no mínimo :min',
             'product_id.unique' => 'Este produto já está no pedido.',
-            'discount.numeric' => 'Disconto precisa ser numérico',
-            'discount.max' => 'Disconto não pode ser maior que :max',
-            'discount.min' => 'Disconto não pode ser menor que :min',
+            'discount.numeric' => 'Desconto precisa ser numérico',
+            'discount.max' => 'Desconto não pode ser maior que :max',
+            'discount.min' => 'Desconto não pode ser menor que :min',
         ]);
 
         if ($validator->fails()) {
