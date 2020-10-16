@@ -59,7 +59,7 @@ class ItemController extends Controller
             $item->addition_value = $item->addition_value;
         }
 
-        $messages = session()->pull('messages_warning');
+        $messages = collect(session()->pull('messages_warning'))->values();
         return ['order' => $order, 'messages' => $messages];
     }
 
