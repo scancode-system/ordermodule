@@ -9,7 +9,10 @@ use Modules\Order\Entities\OrderPayment;
 use Modules\Order\Entities\OrderShippingCompany;
 use Modules\Order\Entities\Status;
 use Modules\Order\Entities\Item;
+use Modules\Saller\Entities\Saller;
 use Rocky\Eloquent\HasDynamicRelation; 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class Order extends Model
 {
@@ -152,5 +155,46 @@ class Order extends Model
 		}
 	}
 
+
+	/* repository */
+	public static function allClosingDates(){
+		$dates =  Order::where('status_id', Status::COMPLETED)->
+		get()->groupBy(function($order){
+			return $order->closing_date->format('Y-m-d');
+		})->keys();
+
+		$carbon_dates = collect([]);
+		foreach ($dates as $date) {
+			$carbon_dates->push(new Carbon($date));
+		}
+		return $carbon_dates;
+	}
+
+	public static function closedOrders(){
+		return Order::where('status_id', Status::COMPLETED)->get();
+	}
+
+	public static function closedOrdersDate($date){
+		return 
+		Order::where('status_id', Status::COMPLETED)->
+		whereDate('closing_date', $date)->get();
+	}
+
+	public static function loadClosedOrdersBySaller(Saller $saller){
+		return 
+		Order::where('status_id', Status::COMPLETED)->
+		whereHas('order_saller', function (Builder $query) use ($saller){
+			$query->where('saller_id', $saller->id);
+		})->get();
+	}
+
+	public static function loadClosedOrdersBySallerDate(Saller $saller, $date){
+		return 
+		Order::where('status_id', Status::COMPLETED)->
+		whereDate('closing_date', $date)->
+		whereHas('order_saller', function (Builder $query) use ($saller){
+			$query->where('saller_id', $saller->id);
+		})->get();
+	}
 
 }
