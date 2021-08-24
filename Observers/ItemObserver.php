@@ -48,11 +48,11 @@ class ItemObserver
 
 		$limit_max = $this->getLimitMax($item);
 		$limit_min = $item->order->order_payment->discount;
-
 		if($limit_min > $limit_max)
 		{
 			$limit_min = $limit_max;
 		}
+		
 
 		if($limit_max < $item->discount){
 			$item->discount = $limit_max;

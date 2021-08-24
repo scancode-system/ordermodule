@@ -16,6 +16,7 @@ class InsertTxtsRecordsModuleOrder extends Migration
     public function up()
     {
         TxtRepository::new(['module' => 'Order', 'service' => 'TxtClient', 'alias' => 'Clientes - Padrão']);
+        TxtRepository::new(['module' => 'Order', 'service' => 'TxtOrder', 'alias' => 'Pedidos - Padrão']);
     }
 
     /**
@@ -26,5 +27,6 @@ class InsertTxtsRecordsModuleOrder extends Migration
     public function down()
     {
         TxtRepository::deleteByAlias('Clientes - Padrão');
+        TxtRepository::deleteByAlias('Pedidos - Padrão');
     }
 }

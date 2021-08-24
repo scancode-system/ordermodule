@@ -47,7 +47,7 @@ class OrderPaymentObserver
 			} else {
 							//dd('nao atualiza');	
 			}	
-
+ 
 		}
 	}
 
